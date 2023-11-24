@@ -14,7 +14,7 @@ classDiagram
     class Cloth {
         + url: String
         + name: String
-        + size: String
+        + sizes: Array<Ref Size>
         + color: String
         + description: String
         + gender: String
@@ -28,7 +28,8 @@ classDiagram
         + url: String
         + color: String
         + size: String
-        + Cloth: Ref
+        + size: Ref Size
+        + Cloth: Ref Cloth
     }
 
     class Category {
