@@ -1,3 +1,13 @@
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+
+const mongoDB = env.MONGODB_URL;
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
