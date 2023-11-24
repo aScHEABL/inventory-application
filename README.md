@@ -2,8 +2,9 @@
 ```mermaid
 classDiagram
     Cloth -- ClothInstance
-    Cloth -- Genre
-    Genre -- SubGenre
+    Cloth -- Category
+    Cloth -- SubCategory
+    Category <-- SubCategory
     Cart -- User
     Order -- User
     Review -- User
@@ -11,39 +12,40 @@ classDiagram
     Cart -- ClothInstance
 
     class Cloth {
-        + price: Int
-        + stock: Int
+        + url: String
         + name: String
         + size: String
         + color: String
         + description: String
-        + url: String
         + gender: String
-        + Genre: Ref Genre
-        + SubGenre: Ref SubGenre
+        + price: Int
+        + stock: Int
+        + Category: Ref Category
+        + SubCategory: Ref SubCategory
     }
 
     class ClothInstance {
-        + Cloth: Ref
         + url: String
         + color: String
         + size: String
+        + Cloth: Ref
     }
 
-    class Genre {
-        + name: String
+    class Category {
         + url: String
-        + SubGenres: Array<Ref SubGenre>
+        + name: String
+        + SubCategory: Array<Ref SubCategory>
     }
 
-    class SubGenre {
-        + name: String
+    class SubCategory {
         + url: String
+        + name: String
         + gender: String
-        + Genre: Ref Genre
+        + Category: Ref Category
     }
 
     class User {
+        + url: String
         + username: String
         - email: String
         - password: String
@@ -53,6 +55,7 @@ classDiagram
     }
 
     class Order {
+        + url: String
         + date: Date
         + status: String
         + items: Array<Ref ClothInstance>
@@ -61,6 +64,7 @@ classDiagram
     }
 
     class Review {
+        + url: String
         + rating: Int
         + comments: String
         + User: Ref User
@@ -68,9 +72,9 @@ classDiagram
     }
 
     class Cart {
+        + url: String
         + items: Array<Ref ClothInstance>
         + User: Ref User
     }
-
 
 ```
