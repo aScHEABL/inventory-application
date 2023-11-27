@@ -2,9 +2,10 @@
 ```mermaid
 classDiagram
     Cloth -- ClothInstance
-    Cloth -- Category
-    Cloth -- SubCategory
-    Category <-- SubCategory
+    Cloth -- Genre
+    Size -- Cloth
+    Color -- Cloth
+    Genre -- SubGenre
     Cart -- User
     Order -- User
     Review -- User
@@ -12,70 +13,73 @@ classDiagram
     Cart -- ClothInstance
 
     class Cloth {
-        + url: String
-        + name: String
-        + sizes: Array<Ref Size>
-        + color: String
-        + description: String
-        + gender: String
         + price: Int
         + stock: Int
-        + Category: Ref Category
-        + SubCategory: Ref SubCategory
+        + name: String
+        + sizes: Array<String>
+        + colors: Array<String>
+        + description: String
+        + url: String
+        + gender: String
+        + genre: Ref Genre
+        + subGenre: Ref SubGenre
     }
 
     class ClothInstance {
+        + Cloth: Ref
+        + sizes: Array<String>
+        + colors: Array<String>
         + url: String
-        + color: String
-        + size: String
-        + size: Ref Size
-        + Cloth: Ref Cloth
     }
 
-    class Category {
-        + url: String
+    class Genre {
         + name: String
-        + SubCategory: Array<Ref SubCategory>
+        + url: String
+        + subGenres: Array<Ref SubGenre>
     }
 
-    class SubCategory {
-        + url: String
+    class Size {
         + name: String
+    }
+
+    class Color {
+        + name: String
+    }
+
+    class SubGenre {
+        + name: String
+        + url: String
         + gender: String
-        + Category: Ref Category
+        + genre: Ref Genre
     }
 
     class User {
-        + url: String
         + username: String
-        - email: String
-        - password: String
-        - address: String
-        - Cart: Array<Ref Cart>
-        - Orders: Array<Ref Order>
+        + email: String
+        + password: String
+        + address: String
+        + cart: Array<Ref Cart>
+        + orders: Array<Ref Order>
     }
 
     class Order {
-        + url: String
         + date: Date
         + status: String
         + items: Array<Ref ClothInstance>
-        + User: Ref User
+        + user: Ref User
         + reviews: Array<Ref Review>
     }
 
     class Review {
-        + url: String
         + rating: Int
         + comments: String
-        + User: Ref User
-        + Cloth: Ref Cloth
+        + user: Ref User
+        + cloth: Ref Cloth
     }
 
     class Cart {
-        + url: String
         + items: Array<Ref ClothInstance>
-        + User: Ref User
+        + user: Ref User
     }
 
 ```
