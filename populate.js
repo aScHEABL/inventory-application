@@ -9,24 +9,24 @@ console.log(
   
   const Cart = require("./models/cart");
   const Category = require("./models/category");
-  const SubCategory = require("./models/subCategory");
   const Cloth = require("./models/cloth");
   const ClothInstance = require("./models/clothInstance");
   const Color = require("./models/color");
+  const Size = require("./models/size");
+  const Gender = require("./models/gender");
   const Order = require("./models/order");
   const Review = require("./models/review");
-  const Size = require("./models/size");
   const User = require("./models/user");
   
   const cartArray = [];
   const categoryArray = [];
-  const subCategoryArray = [];
   const clotheArray = [];
   const clothInstanceArray = [];
   const colorArray = [];
+  const sizeArray = [];
+  const genderArray = [];
   const orderArray = [];
   const reviewArray = [];
-  const sizeArray = [];
   const userArray = [];
   
   const mongoose = require("mongoose");
@@ -70,7 +70,115 @@ console.log(
 
     await user.save();
     userArray[index] = user;
-    console.log(`Added`)
+    console.log(`Added user: ${user}`);
+  }
+
+  async function NewCloth(
+    name, 
+    price, 
+    stock, 
+    description, 
+    gender, 
+    size, 
+    color, 
+    category, 
+  ) {
+    const cloth = new Cloth({
+      name, 
+      price, 
+      stock, 
+      description, 
+      gender, 
+      size, 
+      color, 
+      category, 
+    });
+
+    await cloth.save();
+    clotheArray[index] = cloth;
+    console.log(`Added cloth: ${cloth}`);
+  }
+
+  async function NewSize(index, size) {
+    const size = new Size({
+      size,
+    });
+
+    await size.save();
+    sizeArray[index] = size;
+    console.log(`Added size: ${size}`);
+  }
+
+  async function NewColor(index, color) {
+    const color = new Color({
+      color,
+    });
+
+    await color.save();
+    colorArray[index] = color;
+    console.log(`Added color: ${color}`);
+  }
+
+  async function NewClothInstance(index, cloth, size, color) {
+    const clothInstance = new ClothInstance({
+      cloth,
+      size,
+      color,
+    });
+
+    await clothInstance.save();
+    clothInstanceArray[index] = clothInstance;
+    console.log(`Added cloth instance: ${clothInstance}`);
+  }
+
+  async function NewGender(index, gender) {
+    const gender = new Gender({
+      gender,
+    })
+
+    await gender.save();
+    genderArray[index] = gender;
+    console.log(`Added gender: ${gender}`);
+  }
+
+  async function NewCart(index, cart) {
+    const cart = new Cart({
+      cart,
+    })
+
+    await cart.save();
+    cartArray[index] = cart;
+    console.log(`Added cart: ${cart}`);
+  }
+
+  async function NewCategory(index, category) {
+    const category = new Category({
+      category,
+    })
+
+    await category.save();
+    categoryArray[index] = category;
+    console.log(`Added category: ${category}`);
+  }
+
+  async function NewOrder(index, order) {
+    const order = new Order({
+      order,
+    })
+
+    await order.save();
+    orderArray[index] = order;
+    console.log(`Added order: ${order}`);
+  }
+
+  async function NewReview(index, review) {
+    const review = new Review({
+      review,
+    })
+
+    await review.save();
+    reviewArray[index] = review;
+    console.log(`Added review: ${review}`);
   }
   
   // async function authorCreate(index, first_name, family_name, d_birth, d_death) {
