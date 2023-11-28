@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const SubCategorySchema = new Schema({
     name: { type: String, required: true },
-    gender: { type: String, required: true },
+    gender: { type: String },
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
 })
 

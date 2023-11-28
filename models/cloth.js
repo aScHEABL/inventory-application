@@ -6,12 +6,12 @@ const ClothSchema = new Schema({
     price: { type: Number, required: true },
     stock: { type: Number, required: true },
     name: { type: String, required: true },
-    sizes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Size' }],
-    colors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Color' }],
     description: { type: String, required: true },
     gender: { type: String, required: true },
-    genre: { type: mongoose.Schema.Types.ObjectId, ref: 'Genre' },
-    subGenre: { type: mongoose.Schema.Types.ObjectId, ref: 'SubGenre' },
+    size: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Size', required: true }],
+    color: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Color', required: true }],
+    genre: { type: mongoose.Schema.Types.ObjectId, ref: 'Genre', required: true },
+    subGenre: { type: mongoose.Schema.Types.ObjectId, ref: 'SubGenre', required: true },
   });
 
 ClothSchema.virtual("url").get(function() {
