@@ -2,10 +2,10 @@
 ```mermaid
 classDiagram
     Cloth -- ClothInstance
-    Cloth -- Genre
+    Cloth -- Category
+    Cloth -- Gender
     Size -- Cloth
     Color -- Cloth
-    Genre -- SubGenre
     Cart -- User
     Order -- User
     Review -- User
@@ -32,10 +32,15 @@ classDiagram
         + url: String
     }
 
-    class Genre {
+    class Category {
         + name: String
         + url: String
         + subGenres: Array<Ref SubGenre>
+    }
+
+    class Gender {
+        + name: String
+        + url: String
     }
 
     class Size {
@@ -44,13 +49,6 @@ classDiagram
 
     class Color {
         + name: String
-    }
-
-    class SubGenre {
-        + name: String
-        + url: String
-        + gender: String
-        + genre: Ref Genre
     }
 
     class User {
