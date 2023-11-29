@@ -70,7 +70,7 @@ console.log(
 
     await user.save();
     userArray[index] = user;
-    console.log(`Added user: ${user}`);
+    console.log(`Added user: ${user.username}`);
   }
 
   async function NewCloth(
@@ -131,29 +131,29 @@ console.log(
     console.log(`Added cloth instance: ${clothInstance}`);
   }
 
-  async function NewGender(index, gender) {
+  async function NewGender(index, name) {
     const gender = new Gender({
-      gender,
+      name,
     })
 
     await gender.save();
     genderArray[index] = gender;
-    console.log(`Added gender: ${gender}`);
+    console.log(`Added gender: ${gender.name}`);
   }
 
-  async function NewCart(index, cart) {
+  async function NewCart(index, user) {
     const cart = new Cart({
-      cart,
+      user,
     })
 
     await cart.save();
     cartArray[index] = cart;
-    console.log(`Added cart: ${cart}`);
+    console.log(`Added cart: ${cart.user}`);
   }
 
-  async function NewCategory(index, category) {
+  async function NewCategory(index, name) {
     const category = new Category({
-      category,
+      name,
     })
 
     await category.save();
@@ -161,9 +161,13 @@ console.log(
     console.log(`Added category: ${category}`);
   }
 
-  async function NewOrder(index, order) {
+  async function NewOrder(index, date, status, items, user, reviews) {
     const order = new Order({
-      order,
+      date,
+      status,
+      items,
+      user,
+      reviews,
     })
 
     await order.save();
@@ -171,14 +175,24 @@ console.log(
     console.log(`Added order: ${order}`);
   }
 
-  async function NewReview(index, review) {
+  async function NewReview(index, rating, comment, user, cloth) {
     const review = new Review({
-      review,
+      rating,
+      comment,
+      user,
+      cloth,
     })
 
     await review.save();
     reviewArray[index] = review;
     console.log(`Added review: ${review}`);
+  }
+
+  async function createClothes() {
+    console.log("Adding clothes...");
+    await Promise.all([
+      NewCloth()
+    ])
   }
   
   // async function authorCreate(index, first_name, family_name, d_birth, d_death) {
