@@ -13,4 +13,4 @@ ReviewSchema.virtual("url").get(function() {
     return `/review/${this._id}`;
 })
 
-exports.module = mongoose.model("Review", ReviewSchema);
+module.exports = mongoose.model("Review", ReviewSchema);

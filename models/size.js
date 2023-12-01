@@ -10,4 +10,4 @@ SizeSchema.virtual("url").get(function() {
     return `/inventory/size/${this._id}`;
 })
 
-exports.module = mongoose.model("Size", SizeSchema);
+module.exports = mongoose.model("Size", SizeSchema);

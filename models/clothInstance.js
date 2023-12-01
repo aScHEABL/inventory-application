@@ -12,4 +12,4 @@ ClothInstanceSchema.virtual("url").get(function() {
   return `/inventory/clothinstance/${this._id}`;
 })
 
-exports.module = mongoose.model("ClothInstance", ClothInstanceSchema);
+module.exports = mongoose.model("ClothInstance", ClothInstanceSchema);

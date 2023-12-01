@@ -10,4 +10,4 @@ GenderSchema.virtual("url").get(function() {
     return `/inventory/gender/${this._id}`;
 })
 
-exports.module = mongoose.model("Gender", GenderSchema);
+module.exports = mongoose.model("Gender", GenderSchema);

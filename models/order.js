@@ -14,4 +14,4 @@ OrderSchema.virtual("url").get(function() {
     return `/order/${this._id}`;
 })
 
-exports.module = mongoose.model("Order", OrderSchema);
+module.exports = mongoose.model("Order", OrderSchema);

@@ -10,4 +10,4 @@ CategorySchema.virtual("url").get(function() {
     return `/inventory/category/${this._id}`;
 })
 
-exports.module = mongoose.model("Category", CategorySchema);
+module.exports = mongoose.model("Category", CategorySchema);
