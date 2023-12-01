@@ -44,11 +44,11 @@ console.log(
     // await createAuthors();
     // await createBooks();
     // await createBookInstances();
-    await createClothes();
     await createCategory();
     await createColor();
     await createGender();
     await createSize();
+    await createClothes();
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
   }
@@ -79,24 +79,25 @@ console.log(
   }
 
   async function NewCloth(
-    name, 
-    price, 
-    stock, 
-    description, 
-    gender, 
-    size, 
-    color, 
-    category, 
+    index,
+    nameValue, 
+    priceValue, 
+    descriptionValue, 
+    genderValue, 
+    sizeValue, 
+    colorValue, 
+    categoryValue, 
   ) {
+
+    console.log(typeof priceValue);
     const cloth = new Cloth({
-      name, 
-      price, 
-      stock, 
-      description, 
-      gender, 
-      size, 
-      color, 
-      category, 
+      name: nameValue, 
+      price: priceValue, 
+      description: descriptionValue, 
+      gender: genderValue, 
+      size: sizeValue, 
+      color: colorValue, 
+      category: categoryValue, 
     });
 
     await cloth.save();
@@ -106,7 +107,7 @@ console.log(
 
   async function NewSize(index, sizeValue) {
     const size = new Size({
-      size: sizeValue,
+      name: sizeValue,
     });
 
     await size.save();
@@ -116,7 +117,7 @@ console.log(
 
   async function NewColor(index, colorValue) {
     const color = new Color({
-        color: colorValue,
+        name: colorValue,
     });
 
     await color.save();
@@ -201,7 +202,6 @@ console.log(
       NewCloth(
         "Essential White T-shirt", 
         400, 
-        12,
         "Experience the epitome of simplicity with our Essential White T-shirt. Meticulously crafted from high-quality fabric, it offers a touch of luxury to your everyday style. Whether you're layering or wearing it solo, this tee effortlessly embodies casual elegance.",
         genderArray[0],
         sizeArray[1],
@@ -246,6 +246,8 @@ console.log(
     console.log("Adding category...");
     await Promise.all([
       NewCategory(0, "t-shirt"),
-
+      NewCategory(1, "polo"),
+      NewCategory(2, "sweater"),
+      NewCategory(3, "jacket"),
     ])
   }
