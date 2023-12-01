@@ -89,7 +89,6 @@ console.log(
     categoryValue, 
   ) {
 
-    console.log(typeof priceValue);
     const cloth = new Cloth({
       name: nameValue, 
       price: priceValue, 
@@ -200,12 +199,13 @@ console.log(
     console.log("Adding clothes...");
     await Promise.all([
       NewCloth(
+        0,
         "Essential White T-shirt", 
         400, 
         "Experience the epitome of simplicity with our Essential White T-shirt. Meticulously crafted from high-quality fabric, it offers a touch of luxury to your everyday style. Whether you're layering or wearing it solo, this tee effortlessly embodies casual elegance.",
         genderArray[0],
-        sizeArray[1],
-        colorArray[0],
+        [sizeArray[1]],
+        [colorArray[0]],
         categoryArray[0],
       ),
 
