@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const ClothSchema = new Schema({
     name: { type: String, required: true },
     price: { type: Number, required: true },
-    stock: { type: Number, required: true },
     description: { type: String, required: true },
     gender: { type: String, required: true },
     size: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Size', required: true }],
