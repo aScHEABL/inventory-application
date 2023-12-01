@@ -9,7 +9,7 @@ const ClothSchema = new Schema({
     gender: { type: String, required: true },
     size: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Size', required: true }],
     color: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Color', required: true }],
-    category: { type: mongoose.Schema.Types.ObjectId, ref: 'Genre', required: true },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
   });
 
 ClothSchema.virtual("url").get(function() {
