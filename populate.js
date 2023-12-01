@@ -136,9 +136,9 @@ console.log(
     console.log(`Added cloth instance: ${clothInstance}`);
   }
 
-  async function NewGender(index, name) {
+  async function NewGender(index, nameValue) {
     const gender = new Gender({
-      name,
+      name: nameValue,
     })
 
     await gender.save();
@@ -156,9 +156,9 @@ console.log(
     console.log(`Added cart: ${cart.user}`);
   }
 
-  async function NewCategory(index, name) {
+  async function NewCategory(index, nameValue) {
     const category = new Category({
-      name,
+      name: nameValue,
     })
 
     await category.save();
