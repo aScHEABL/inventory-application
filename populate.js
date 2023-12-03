@@ -184,17 +184,55 @@ console.log(
   async function createClothes() {
     console.log("Adding clothes...");
     await Promise.all([
-      NewCloth(
-        0,
-        "Essential White T-shirt", 
-        400, 
-        "Experience the epitome of simplicity with our Essential White T-shirt. Meticulously crafted from high-quality fabric, it offers a touch of luxury to your everyday style. Whether you're layering or wearing it solo, this tee effortlessly embodies casual elegance.",
-        genderArray[0],
-        [sizeArray[1]],
-        [colorArray[0]],
-        categoryArray[0],
-      ),
-
+        NewCloth(
+          0,
+          "Essential White T-shirt", 
+          400, 
+          "Experience the epitome of simplicity with our Essential White T-shirt. Meticulously crafted from high-quality fabric, it offers a touch of luxury to your everyday style. Whether you're layering or wearing it solo, this tee effortlessly embodies casual elegance.",
+          genderArray[0],
+          sizeArray,
+          colorArray[0],
+          categoryArray[0],
+        ),
+        NewCloth(
+          1,
+          "White Tight Fit Premium T-shirt",
+          600,
+          "Experience the epitome of style and precision with our White Tight Fit Premium T-shirt. Tailored to perfection, it hugs your curves while maintaining an airy feel. Elevate your wardrobe with this sleek and modern essential for those who appreciate both style and comfort.",
+          genderArray[0],
+          sizeArray,
+          colorArray[0],
+          categoryArray[0],
+        ),
+        NewCloth(
+          2,
+          "Essential Red Polo-shirt",
+          450,
+          "Make a bold statement with our Essential Red Polo-shirt. The rich red color adds a touch of vibrancy to the classic polo silhouette, creating a versatile garment that transitions seamlessly from day to night. Crafted for comfort and designed for style, this polo is a must-have for the modern wardrobe.",
+          genderArray[0],
+          sizeArray,
+          colorArray[3],
+          categoryArray[1],
+        ),
+        NewCloth(
+          3,
+          "Essential Blue Premium T-shirt",
+          600,
+          "Elevate your wardrobe with our Essential Blue Premium T-shirt – a beacon of luxury and style. Meticulously crafted from premium materials, this shirt offers a level of comfort that complements its rich blue hue. Redefine casual elegance with this essential addition to your collection.",
+          genderArray[0],
+          sizeArray,
+          colorArray[3],
+          categoryArray[1],
+        ),
+        NewCloth(
+          4,
+          "Essential Yellow T-shirt",
+          400,
+          "Brighten up your wardrobe with our Essential Yellow T-shirt, a burst of sunshine in every stitch. Crafted from soft, breathable fabric, this shirt brings warmth and style to your everyday look. Embrace the joy of easygoing fashion with this essential piece.",
+          genderArray[0],
+          sizeArray,
+          colorArray[3]
+        )
     ])
   }
 
