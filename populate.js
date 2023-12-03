@@ -40,10 +40,6 @@ console.log(
     console.log("Debug: About to connect");
     await mongoose.connect(mongoDB);
     console.log("Debug: Should be connected?");
-    // await createGenres();
-    // await createAuthors();
-    // await createBooks();
-    // await createBookInstances();
     await createCategory();
     await createColor();
     await createGender();
@@ -52,16 +48,6 @@ console.log(
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
   }
-  
-  // We pass the index to the ...Create functions so that, for example,
-  // genre[0] will always be the Fantasy genre, regardless of the order
-  // in which the elements of promise.all's argument complete.
-  // async function genreCreate(index, name) {
-  //   const genre = new Genre({ name: name });
-  //   await genre.save();
-  //   genres[index] = genre;
-  //   console.log(`Added genre: ${name}`);
-  // }
 
   async function NewUser(index, username, email, password, address, cart, order) {
     const user = new User({ 
