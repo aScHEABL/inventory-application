@@ -13,29 +13,24 @@ classDiagram
     Cart -- ClothInstance
 
     class Cloth {
-        + price: Int
-        + stock: Int
+        + price: Number
         + name: String
-        + sizes: Array<String>
-        + colors: Array<String>
+        + size: Ref sizes Array<String>
         + description: String
         + url: String
         + gender: String
-        + genre: Ref Genre
-        + subGenre: Ref SubGenre
+        + Category: Ref Category Array<String>
     }
 
     class ClothInstance {
-        + Cloth: Ref
-        + sizes: Array<String>
-        + colors: Array<String>
+        + Cloth: Ref Cloth
+        + size: Array<String>
         + url: String
     }
 
     class Category {
         + name: String
         + url: String
-        + subGenres: Array<Ref SubGenre>
     }
 
     class Gender {
@@ -69,14 +64,14 @@ classDiagram
     }
 
     class Review {
-        + rating: Int
+        + rating: Number
         + comments: String
         + user: Ref User
         + cloth: Ref Cloth
     }
 
     class Cart {
-        + items: Array<Ref ClothInstance>
+        + items: Ref ClothInstance<Array>
         + user: Ref User
     }
 

@@ -11,8 +11,6 @@ console.log(
   const Category = require("./models/category");
   const Cloth = require("./models/cloth");
   const ClothInstance = require("./models/clothInstance");
-  const Color = require("./models/color");
-  const Size = require("./models/size");
   const Gender = require("./models/gender");
   const Order = require("./models/order");
   const Review = require("./models/review");
@@ -22,8 +20,7 @@ console.log(
   const categoryArray = [];
   const clotheArray = [];
   const clothInstanceArray = [];
-  const colorArray = [];
-  const sizeArray = [];
+  const sizeArray = ["small", "medium", "large", "xl"];
   const genderArray = [];
   const orderArray = [];
   const reviewArray = [];
@@ -41,9 +38,7 @@ console.log(
     await mongoose.connect(mongoDB);
     console.log("Debug: Should be connected?");
     await createCategory();
-    await createColor();
     await createGender();
-    await createSize();
     await createClothes();
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
@@ -70,8 +65,6 @@ console.log(
     priceValue, 
     descriptionValue, 
     genderValue, 
-    sizeValue, 
-    colorValue, 
     categoryValue, 
   ) {
 
@@ -80,8 +73,7 @@ console.log(
       price: priceValue, 
       description: descriptionValue, 
       gender: genderValue, 
-      size: sizeValue, 
-      color: colorValue, 
+      size: sizeArray, 
       category: categoryValue, 
     });
 
@@ -90,31 +82,10 @@ console.log(
     console.log(`Added cloth: ${cloth}`);
   }
 
-  async function NewSize(index, sizeValue) {
-    const size = new Size({
-      name: sizeValue,
-    });
-
-    await size.save();
-    sizeArray[index] = size;
-    console.log(`Added size: ${size}`);
-  }
-
-  async function NewColor(index, colorValue) {
-    const color = new Color({
-        name: colorValue,
-    });
-
-    await color.save();
-    colorArray[index] = color;
-    console.log(`Added color: ${color}`);
-}
-
   async function NewClothInstance(index, cloth, size, color) {
     const clothInstance = new ClothInstance({
       cloth,
       size,
-      color,
     });
 
     await clothInstance.save();
@@ -187,132 +158,130 @@ console.log(
         NewCloth(
           0,
           "Essential White T-Shirt", 
-          400, 
+          399, 
           "Experience the epitome of simplicity with our Essential White T-shirt. Meticulously crafted from high-quality fabric, it offers a touch of luxury to your everyday style. Whether you're layering or wearing it solo, this tee effortlessly embodies casual elegance.",
           genderArray[0],
-          sizeArray,
-          colorArray[0],
           categoryArray[0],
         ),
         NewCloth(
           1,
           "White Tight Fit Premium T-Shirt",
-          600,
+          599,
           "Experience the epitome of style and precision with our White Tight Fit Premium T-shirt. Tailored to perfection, it hugs your curves while maintaining an airy feel. Elevate your wardrobe with this sleek and modern essential for those who appreciate both style and comfort.",
           genderArray[0],
-          sizeArray,
-          colorArray[0],
           categoryArray[0],
         ),
         NewCloth(
           2,
           "Essential Red Polo-Shirt",
-          450,
+          449,
           "Make a bold statement with our Essential Red Polo-shirt. The rich red color adds a touch of vibrancy to the classic polo silhouette, creating a versatile garment that transitions seamlessly from day to night. Crafted for comfort and designed for style, this polo is a must-have for the modern wardrobe.",
           genderArray[0],
-          sizeArray,
-          colorArray[3],
           categoryArray[1],
         ),
         NewCloth(
           3,
           "Essential Blue Premium T-Shirt",
-          600,
+          599,
           "Elevate your wardrobe with our Essential Blue Premium T-shirt – a beacon of luxury and style. Meticulously crafted from premium materials, this shirt offers a level of comfort that complements its rich blue hue. Redefine casual elegance with this essential addition to your collection.",
           genderArray[0],
-          sizeArray,
-          colorArray[4],
           categoryArray[1],
         ),
         NewCloth(
           4,
           "Essential Yellow T-shirt",
-          400,
+          399,
           "Brighten up your wardrobe with our Essential Yellow T-shirt, a burst of sunshine in every stitch. Crafted from soft, breathable fabric, this shirt brings warmth and style to your everyday look. Embrace the joy of easygoing fashion with this essential piece.",
           genderArray[0],
-          sizeArray,
-          colorArray[5],
           categoryArray[0],
         ),
         NewCloth(
           5,
           "Essential Red T-shirt",
-          400,
+          399,
           "Elevate your wardrobe with our Essential Red T-shirt – a bold yet simple statement piece. The vibrant red hue adds a touch of excitement to the classic T-shirt design. Embrace timeless charm with this essential addition to your collection.",
           genderArray[0],
-          sizeArray,
-          colorArray[3],
           categoryArray[0],
         ),
         NewCloth(
           6,
           "White Short-Sleeves Shirt",
-          600,
+          599,
           "Elevate your everyday style with our White Short-sleeve Shirt. Crafted for comfort and designed for elegance, this shirt seamlessly transitions from casual to polished. Embrace the ease of dressing well with this versatile wardrobe staple.",
           genderArray[0],
-          sizeArray,
-          colorArray[0],
           categoryArray[4],
         ),
         NewCloth(
           7,
           "Light Grey Long-Sleeves Shirt",
-          700,
+          699,
           "Transition seamlessly through the seasons with our Light Grey Long-Sleeve Shirt. The versatile shade and long sleeves offer a perfect balance of elegance and comfort. Make a statement with this wardrobe staple that adapts to your style effortlessly.",
           genderArray[0],
-          sizeArray,
-          colorArray[2],
           categoryArray[4],
         ),
         NewCloth(
           8,
           "White Long-Sleeves Shirt",
-          700,
+          699,
           "Unveil versatile elegance with our Long-sleeve White Shirt. The enduring white color serves as a canvas for your personal style, while the long sleeves provide an extra layer of refinement. Make a lasting impression with this essential piece for any fashion-forward individual.",
           genderArray[0],
-          sizeArray,
-          colorArray[0],
           categoryArray[4],
         ),
         NewCloth(
           9,
           "Crimson Short-Sleeves Shirt",
-          700,
+          699,
           "Introducing our Crimson Short-sleeve Shirt—a burst of vivid charm that seamlessly blends comfort with chic style. The breathable fabric ensures a comfortable fit, while the striking crimson color makes it a standout piece for any casual occasion.",
           genderArray[0],
-          sizeArray,
-          colorArray[0],
           categoryArray[4],
         ),
         NewCloth(
           10,
           "White Sweater",
-          1500,
+          1499,
           "Step into a winter wonderland with our White Sweater—a cozy companion for the colder season. The intricate knit details and pure white shade create a charming and stylish look. Stay snug and fashionable with this must-have winter essential.",
           genderArray[0],
-          sizeArray,
-          colorArray[0],
           categoryArray[2]
         ),
         NewCloth(
           11,
           "Black Sweater",
-          1500,
+          1499,
           "Introducing the Black Edition of our timeless sweater. The rich black hue and classic knit pattern make it a must-have for the colder months. Stay warm in style with this effortlessly elegant addition to your closet.",
           genderArray[0],
-          sizeArray,
-          colorArray[1],
           categoryArray[2],
         ),
         NewCloth(
           12,
           "Blue Sweater",
-          1500,
+          1499,
           "Embrace the winter blues in a whole new way with our Blue Sweater. The soft, knitted fabric and soothing blue hues create a cozy and stylish piece for the colder season. Stay warm while making a fashion statement with this essential addition to your wardrobe.",
           genderArray[0],
-          sizeArray,
-          colorArray[4],
           categoryArray[2],
+        ),
+        NewCloth(
+          13,
+          "Red Sweater",
+          1499,
+          "Experience fireside warmth with our Red Sweater. The cozy knit fabric and rich red color create a perfect blend of comfort and style. Elevate your winter wardrobe with this vibrant and essential piece.",
+          genderArray[0],
+          categoryArray[2],
+        ),
+        NewCloth(
+          14,
+          "Green Hood Parka",
+          2299,
+          "Unleash your adventurous spirit with our Forest Green Hooded Parka. This versatile outerwear combines the rich green hue of a forest canopy with the practicality of a hood, creating the perfect companion for your outdoor escapades. Stay warm and stylish on your next adventure.",
+          genderArray[0],
+          categoryArray[3],
+        ),
+        NewCloth(
+          15,
+          "Blue Jeans Jacket",
+          2299,
+          "Elevate your casual chic with our Blue Jeans Jacket. The deep blue color and stylish denim design create a fashionable statement piece. Whether layered or worn solo, this jacket adds a touch of sophistication to your everyday look.",
+          genderArray[0],
+          categoryArray[3],
         )
     ])
   }
@@ -322,28 +291,6 @@ console.log(
     await Promise.all([
       NewGender(0, "male"),
       NewGender(1, "female"),
-    ])
-  }
-
-  async function createSize() {
-    console.log("Adding sizes...");
-    await Promise.all([
-      NewSize(0, "small"),
-      NewSize(1, "medium"),
-      NewSize(2, "large"),
-      NewSize(3, "xl"),
-    ])
-  }
-
-  async function createColor() {
-    console.log("Adding colors...");
-    await Promise.all([
-      NewColor(0, "white"),
-      NewColor(1, "black"),
-      NewColor(2, "grey"),
-      NewColor(3, "red"),
-      NewColor(4, "blue"),
-      NewColor(5, "yellow"),
     ])
   }
 
