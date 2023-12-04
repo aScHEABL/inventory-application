@@ -186,7 +186,7 @@ console.log(
     await Promise.all([
         NewCloth(
           0,
-          "Essential White T-shirt", 
+          "Essential White T-Shirt", 
           400, 
           "Experience the epitome of simplicity with our Essential White T-shirt. Meticulously crafted from high-quality fabric, it offers a touch of luxury to your everyday style. Whether you're layering or wearing it solo, this tee effortlessly embodies casual elegance.",
           genderArray[0],
@@ -196,7 +196,7 @@ console.log(
         ),
         NewCloth(
           1,
-          "White Tight Fit Premium T-shirt",
+          "White Tight Fit Premium T-Shirt",
           600,
           "Experience the epitome of style and precision with our White Tight Fit Premium T-shirt. Tailored to perfection, it hugs your curves while maintaining an airy feel. Elevate your wardrobe with this sleek and modern essential for those who appreciate both style and comfort.",
           genderArray[0],
@@ -206,7 +206,7 @@ console.log(
         ),
         NewCloth(
           2,
-          "Essential Red Polo-shirt",
+          "Essential Red Polo-Shirt",
           450,
           "Make a bold statement with our Essential Red Polo-shirt. The rich red color adds a touch of vibrancy to the classic polo silhouette, creating a versatile garment that transitions seamlessly from day to night. Crafted for comfort and designed for style, this polo is a must-have for the modern wardrobe.",
           genderArray[0],
@@ -216,12 +216,12 @@ console.log(
         ),
         NewCloth(
           3,
-          "Essential Blue Premium T-shirt",
+          "Essential Blue Premium T-Shirt",
           600,
           "Elevate your wardrobe with our Essential Blue Premium T-shirt – a beacon of luxury and style. Meticulously crafted from premium materials, this shirt offers a level of comfort that complements its rich blue hue. Redefine casual elegance with this essential addition to your collection.",
           genderArray[0],
           sizeArray,
-          colorArray[3],
+          colorArray[4],
           categoryArray[1],
         ),
         NewCloth(
@@ -231,7 +231,88 @@ console.log(
           "Brighten up your wardrobe with our Essential Yellow T-shirt, a burst of sunshine in every stitch. Crafted from soft, breathable fabric, this shirt brings warmth and style to your everyday look. Embrace the joy of easygoing fashion with this essential piece.",
           genderArray[0],
           sizeArray,
-          colorArray[3]
+          colorArray[5],
+          categoryArray[0],
+        ),
+        NewCloth(
+          5,
+          "Essential Red T-shirt",
+          400,
+          "Elevate your wardrobe with our Essential Red T-shirt – a bold yet simple statement piece. The vibrant red hue adds a touch of excitement to the classic T-shirt design. Embrace timeless charm with this essential addition to your collection.",
+          genderArray[0],
+          sizeArray,
+          colorArray[3],
+          categoryArray[0],
+        ),
+        NewCloth(
+          6,
+          "White Short-Sleeves Shirt",
+          600,
+          "Elevate your everyday style with our White Short-sleeve Shirt. Crafted for comfort and designed for elegance, this shirt seamlessly transitions from casual to polished. Embrace the ease of dressing well with this versatile wardrobe staple.",
+          genderArray[0],
+          sizeArray,
+          colorArray[0],
+          categoryArray[4],
+        ),
+        NewCloth(
+          7,
+          "Light Grey Long-Sleeves Shirt",
+          700,
+          "Transition seamlessly through the seasons with our Light Grey Long-Sleeve Shirt. The versatile shade and long sleeves offer a perfect balance of elegance and comfort. Make a statement with this wardrobe staple that adapts to your style effortlessly.",
+          genderArray[0],
+          sizeArray,
+          colorArray[2],
+          categoryArray[4],
+        ),
+        NewCloth(
+          8,
+          "White Long-Sleeves Shirt",
+          700,
+          "Unveil versatile elegance with our Long-sleeve White Shirt. The enduring white color serves as a canvas for your personal style, while the long sleeves provide an extra layer of refinement. Make a lasting impression with this essential piece for any fashion-forward individual.",
+          genderArray[0],
+          sizeArray,
+          colorArray[0],
+          categoryArray[4],
+        ),
+        NewCloth(
+          9,
+          "Crimson Short-Sleeves Shirt",
+          700,
+          "Introducing our Crimson Short-sleeve Shirt—a burst of vivid charm that seamlessly blends comfort with chic style. The breathable fabric ensures a comfortable fit, while the striking crimson color makes it a standout piece for any casual occasion.",
+          genderArray[0],
+          sizeArray,
+          colorArray[0],
+          categoryArray[4],
+        ),
+        NewCloth(
+          10,
+          "White Sweater",
+          1500,
+          "Step into a winter wonderland with our White Sweater—a cozy companion for the colder season. The intricate knit details and pure white shade create a charming and stylish look. Stay snug and fashionable with this must-have winter essential.",
+          genderArray[0],
+          sizeArray,
+          colorArray[0],
+          categoryArray[2]
+        ),
+        NewCloth(
+          11,
+          "Black Sweater",
+          1500,
+          "Introducing the Black Edition of our timeless sweater. The rich black hue and classic knit pattern make it a must-have for the colder months. Stay warm in style with this effortlessly elegant addition to your closet.",
+          genderArray[0],
+          sizeArray,
+          colorArray[1],
+          categoryArray[2],
+        ),
+        NewCloth(
+          12,
+          "Blue Sweater",
+          1500,
+          "Embrace the winter blues in a whole new way with our Blue Sweater. The soft, knitted fabric and soothing blue hues create a cozy and stylish piece for the colder season. Stay warm while making a fashion statement with this essential addition to your wardrobe.",
+          genderArray[0],
+          sizeArray,
+          colorArray[4],
+          categoryArray[2],
         )
     ])
   }
@@ -273,5 +354,6 @@ console.log(
       NewCategory(1, "polo"),
       NewCategory(2, "sweater"),
       NewCategory(3, "jacket"),
+      NewCategory(4, "shirt"),
     ])
   }
