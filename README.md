@@ -1,3 +1,5 @@
+- If populating database by seed-scripts, the change should be incremental so something doesn't break easily.
+
 ## Fashion ecommerce database diagram
 ```mermaid
 classDiagram

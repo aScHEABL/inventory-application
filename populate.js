@@ -15,12 +15,18 @@ console.log(
   const Order = require("./models/order");
   const Review = require("./models/review");
   const User = require("./models/user");
+  const Size = require("./models/size");
   
+  const sizeArray = [
+    { type: 'small' },
+    { type: 'medium' },
+    { type: 'large' },
+    { type: 'extra-large' },
+  ];
   const cartArray = [];
   const categoryArray = [];
   const clotheArray = [];
   const clothInstanceArray = [];
-  const sizeArray = ["small", "medium", "large", "xl"];
   const genderArray = [];
   const orderArray = [];
   const reviewArray = [];
@@ -37,9 +43,14 @@ console.log(
     console.log("Debug: About to connect");
     await mongoose.connect(mongoDB);
     console.log("Debug: Should be connected?");
+
+    const result = await Size.insertMany(sizeArray);
+    console.log("Sizes inserted successfully:", result);
+
     await createCategory();
     await createGender();
-    await createClothes();
+    await createCloth();
+    await createClothInstance();
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
   }
@@ -73,19 +84,24 @@ console.log(
       price: priceValue, 
       description: descriptionValue, 
       gender: genderValue, 
-      size: sizeArray, 
       category: categoryValue, 
     });
-
-    await cloth.save();
-    clotheArray[index] = cloth;
-    console.log(`Added cloth: ${cloth}`);
+    try {
+      await cloth.save();
+      clotheArray[index] = cloth;
+      console.log(`Added cloth: ${cloth}`);
+    } catch(error) {
+      console.error(error.message);
+    }
   }
 
-  async function NewClothInstance(index, cloth, size, color) {
+  async function NewClothInstance(index, clothReference, sizeType) {
+    const size = await Size.findOne({ type: sizeType });
+    console.log(size);
+
     const clothInstance = new ClothInstance({
-      cloth,
-      size,
+      cloth: clothReference,
+      size: size,
     });
 
     await clothInstance.save();
@@ -118,9 +134,13 @@ console.log(
       name: nameValue,
     })
 
-    await category.save();
-    categoryArray[index] = category;
-    console.log(`Added category: ${category}`);
+    try {
+      await category.save();
+      categoryArray[index] = category;
+      console.log(`Added category: ${category}`);
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   async function NewOrder(index, date, status, items, user, reviews) {
@@ -152,7 +172,7 @@ console.log(
 
   // Creation of database entries
 
-  async function createClothes() {
+  async function createCloth() {
     console.log("Adding clothes...");
     await Promise.all([
         NewCloth(
@@ -283,6 +303,23 @@ console.log(
           genderArray[0],
           categoryArray[3],
         )
+    ])
+  }
+
+  async function createClothInstance() {
+    console.log("Adding cloth instances");
+    await Promise.all([
+      NewClothInstance(0, clotheArray[0], "small"),
+      NewClothInstance(1, clotheArray[0], "small"),
+      NewClothInstance(2, clotheArray[0], "medium"),
+      NewClothInstance(3, clotheArray[0], "large"),
+      NewClothInstance(4, clotheArray[0], "extra-large"),
+      NewClothInstance(5, clotheArray[1], "medium"),
+      NewClothInstance(6, clotheArray[1], "medium"),
+      NewClothInstance(7, clotheArray[1], "medium"),
+      NewClothInstance(8, clotheArray[1], "large"),
+      NewClothInstance(9, clotheArray[1], "large"),
+      NewClothInstance(10, clotheArray[1], "medium"),
     ])
   }
 
