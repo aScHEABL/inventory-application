@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
@@ -20,6 +22,7 @@ const usersRouter = require('./routes/users');
 const app = express();
 
 // view engine setup
+app.engine('ejs', require('express-ejs-extend'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
