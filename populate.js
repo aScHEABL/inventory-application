@@ -55,14 +55,14 @@ console.log(
     mongoose.connection.close();
   }
 
-  async function NewUser(index, username, email, password, address, cart, order) {
+  async function NewUser(index, usernameValue, emailValue, passwordValue, addressValue, cartRef, orderRef) {
     const user = new User({ 
-      username, 
-      email, 
-      password, 
-      address, 
-      cart,
-      order, 
+      username: usernameValue,
+      email: emailValue,
+      password: passwordValue, 
+      address: addressValue, 
+      cart: cartRef,
+      order: orderRef, 
     })
 
     await user.save();
@@ -119,9 +119,9 @@ console.log(
     console.log(`Added gender: ${gender.name}`);
   }
 
-  async function NewCart(index, user) {
+  async function NewCart(index, userRef) {
     const cart = new Cart({
-      user,
+      user: userRef,
     })
 
     await cart.save();
