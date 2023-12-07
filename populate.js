@@ -76,6 +76,7 @@ console.log(
     priceValue, 
     descriptionValue, 
     genderValue, 
+    imageValue,
     categoryValue, 
   ) {
 
@@ -84,6 +85,7 @@ console.log(
       price: priceValue, 
       description: descriptionValue, 
       gender: genderValue, 
+      imageURL: imageValue,
       category: categoryValue, 
     });
     try {
@@ -181,6 +183,7 @@ console.log(
           399, 
           "Experience the epitome of simplicity with our Essential White T-shirt. Meticulously crafted from high-quality fabric, it offers a touch of luxury to your everyday style. Whether you're layering or wearing it solo, this tee effortlessly embodies casual elegance.",
           genderArray[0],
+          "https://source.unsplash.com/WWesmHEgXDs",
           categoryArray[0],
         ),
         NewCloth(
@@ -189,6 +192,7 @@ console.log(
           599,
           "Experience the epitome of style and precision with our White Tight Fit Premium T-shirt. Tailored to perfection, it hugs your curves while maintaining an airy feel. Elevate your wardrobe with this sleek and modern essential for those who appreciate both style and comfort.",
           genderArray[0],
+          "https://tailoredathlete.com/cdn/shop/files/TA-13-07-2350822_1200x.jpg",
           categoryArray[0],
         ),
         NewCloth(
@@ -197,6 +201,7 @@ console.log(
           449,
           "Make a bold statement with our Essential Red Polo-shirt. The rich red color adds a touch of vibrancy to the classic polo silhouette, creating a versatile garment that transitions seamlessly from day to night. Crafted for comfort and designed for style, this polo is a must-have for the modern wardrobe.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/2a5612cc-ae06-48ec-aae7-32d10084f22a.jpeg",
           categoryArray[1],
         ),
         NewCloth(
@@ -205,6 +210,7 @@ console.log(
           599,
           "Elevate your wardrobe with our Essential Blue Premium T-shirt – a beacon of luxury and style. Meticulously crafted from premium materials, this shirt offers a level of comfort that complements its rich blue hue. Redefine casual elegance with this essential addition to your collection.",
           genderArray[0],
+          "https://adamp28.sg-host.com/wp-content/uploads/2018/10/men-neon-blue-tshirt-gildan-adult-front1.jpg",
           categoryArray[1],
         ),
         NewCloth(
@@ -213,6 +219,7 @@ console.log(
           399,
           "Brighten up your wardrobe with our Essential Yellow T-shirt, a burst of sunshine in every stitch. Crafted from soft, breathable fabric, this shirt brings warmth and style to your everyday look. Embrace the joy of easygoing fashion with this essential piece.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/650e1b8b-8798-4b16-a970-5be728d534bc.jpeg",
           categoryArray[0],
         ),
         NewCloth(
@@ -221,6 +228,7 @@ console.log(
           399,
           "Elevate your wardrobe with our Essential Red T-shirt – a bold yet simple statement piece. The vibrant red hue adds a touch of excitement to the classic T-shirt design. Embrace timeless charm with this essential addition to your collection.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/0157e95a-2038-4c0b-9652-e0810b5e6b3c.jpeg",
           categoryArray[0],
         ),
         NewCloth(
@@ -229,6 +237,7 @@ console.log(
           599,
           "Elevate your everyday style with our White Short-sleeve Shirt. Crafted for comfort and designed for elegance, this shirt seamlessly transitions from casual to polished. Embrace the ease of dressing well with this versatile wardrobe staple.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/fa4e72e4-c3f2-4125-8f0b-67a8e68fb09f.jpeg",
           categoryArray[4],
         ),
         NewCloth(
@@ -237,6 +246,7 @@ console.log(
           699,
           "Transition seamlessly through the seasons with our Light Grey Long-Sleeve Shirt. The versatile shade and long sleeves offer a perfect balance of elegance and comfort. Make a statement with this wardrobe staple that adapts to your style effortlessly.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/c68b9618-c602-4709-8442-2d36fbcad500.jpeg",
           categoryArray[4],
         ),
         NewCloth(
@@ -245,6 +255,7 @@ console.log(
           699,
           "Unveil versatile elegance with our Long-sleeve White Shirt. The enduring white color serves as a canvas for your personal style, while the long sleeves provide an extra layer of refinement. Make a lasting impression with this essential piece for any fashion-forward individual.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/0e708db1-e827-4821-b5e0-e29ad8799e23.jpeg",
           categoryArray[4],
         ),
         NewCloth(
@@ -253,6 +264,7 @@ console.log(
           699,
           "Introducing our Crimson Short-sleeve Shirt—a burst of vivid charm that seamlessly blends comfort with chic style. The breathable fabric ensures a comfortable fit, while the striking crimson color makes it a standout piece for any casual occasion.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/dc946b00-9a27-45cd-a471-edb2a0785247.jpeg",
           categoryArray[4],
         ),
         NewCloth(
@@ -261,6 +273,7 @@ console.log(
           1499,
           "Step into a winter wonderland with our White Sweater—a cozy companion for the colder season. The intricate knit details and pure white shade create a charming and stylish look. Stay snug and fashionable with this must-have winter essential.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/50931893-937c-48ff-8ac5-8e2457fb264e.jpeg",
           categoryArray[2]
         ),
         NewCloth(
@@ -269,6 +282,7 @@ console.log(
           1499,
           "Introducing the Black Edition of our timeless sweater. The rich black hue and classic knit pattern make it a must-have for the colder months. Stay warm in style with this effortlessly elegant addition to your closet.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/31ebe3fb-0a36-4ab6-a120-390f09f36526.jpeg",
           categoryArray[2],
         ),
         NewCloth(
@@ -277,6 +291,7 @@ console.log(
           1499,
           "Embrace the winter blues in a whole new way with our Blue Sweater. The soft, knitted fabric and soothing blue hues create a cozy and stylish piece for the colder season. Stay warm while making a fashion statement with this essential addition to your wardrobe.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/7a2cbff1-bdc7-4e5e-931e-5d114c960863.jpeg",
           categoryArray[2],
         ),
         NewCloth(
@@ -285,6 +300,7 @@ console.log(
           1499,
           "Experience fireside warmth with our Red Sweater. The cozy knit fabric and rich red color create a perfect blend of comfort and style. Elevate your winter wardrobe with this vibrant and essential piece.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/1591dd29-a800-4cef-8a3f-7ee85b8de8f8.jpeg",
           categoryArray[2],
         ),
         NewCloth(
@@ -293,6 +309,7 @@ console.log(
           2299,
           "Unleash your adventurous spirit with our Forest Green Hooded Parka. This versatile outerwear combines the rich green hue of a forest canopy with the practicality of a hood, creating the perfect companion for your outdoor escapades. Stay warm and stylish on your next adventure.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/c38b66ab-8c67-4c21-9446-1ac6b555d22e.jpeg",
           categoryArray[3],
         ),
         NewCloth(
@@ -301,6 +318,7 @@ console.log(
           2299,
           "Elevate your casual chic with our Blue Jeans Jacket. The deep blue color and stylish denim design create a fashionable statement piece. Whether layered or worn solo, this jacket adds a touch of sophistication to your everyday look.",
           genderArray[0],
+          "https://n.nordstrommedia.com/id/sr3/f551c8b7-7533-4acb-a063-5d8fbb342e78.jpeg",
           categoryArray[3],
         )
     ])

@@ -7,6 +7,7 @@ const ClothSchema = new Schema({
     price: { type: Number, required: true },
     description: { type: String, required: true },
     gender: { type: String, required: true },
+    imageURL: { type: String, required: true },
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
   });
 
