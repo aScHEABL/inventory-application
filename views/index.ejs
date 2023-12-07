@@ -2,7 +2,7 @@
 
 <% extend('layout') %>
 
-<div class="hero min-h-[calc(100vh-5rem)] grid-cols-2" style="background-image: url(https://source.unsplash.com/P3pI6xzovu0);">
+<section class="hero min-h-[calc(100vh-5rem)] grid-cols-2" style="background-image: url(https://source.unsplash.com/P3pI6xzovu0);">
     <div class="hero-overlay bg-opacity-40 col-span-full"></div>
     <div class="hero-content text-neutral-content col-start-2">
     <div class="max-w-xl">
@@ -11,10 +11,16 @@
         <button class="btn btn-secondary btn-lg bg-white bg-slate-400 hover:bg-slate-300 rounded-md">Shop Now</button>
     </div>
     </div>
-</div>
+</section>
 
 <h1 class="m-5 text-5xl text-white text-center">Featured Products</h1>
 
-<ul>
-  <% for (let i)
-</ul>
+<section>
+  <ul class="flex justify-center gap-8">
+    <% for (let i = 0; i < clothes_Array.length; i++) { %>
+      <li>
+        <img class="w-[20rem]" src="<%= clothes_Array[i].imageURL %>" />
+      </li>
+    <% } %>
+  </ul>
+</section>
