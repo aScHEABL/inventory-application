@@ -11,6 +11,6 @@ exports.featuredProducts = asyncHandler(async(req, res, next) => {
     res.render("index",
         {
             title: 'Fake Fashion E-Store',
-            clothes_Array: featuredProducts_array,
+            clothes_array: featuredProducts_array,
         })
 })
