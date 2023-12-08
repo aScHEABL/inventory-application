@@ -183,7 +183,7 @@ console.log(
           399, 
           "Experience the epitome of simplicity with our Essential White T-shirt. Meticulously crafted from high-quality fabric, it offers a touch of luxury to your everyday style. Whether you're layering or wearing it solo, this tee effortlessly embodies casual elegance.",
           genderArray[0],
-          "https://source.unsplash.com/WWesmHEgXDs",
+          "https://n.nordstrommedia.com/id/sr3/6bf50448-af78-4e38-847a-056c2fdf3bfc.jpeg",
           categoryArray[0],
         ),
         NewCloth(
@@ -192,7 +192,7 @@ console.log(
           599,
           "Experience the epitome of style and precision with our White Tight Fit Premium T-shirt. Tailored to perfection, it hugs your curves while maintaining an airy feel. Elevate your wardrobe with this sleek and modern essential for those who appreciate both style and comfort.",
           genderArray[0],
-          "https://tailoredathlete.com/cdn/shop/files/TA-13-07-2350822_1200x.jpg",
+          "https://n.nordstrommedia.com/id/sr3/7e47f4b0-7a29-4ede-80ff-837acef60dd0.jpeg",
           categoryArray[0],
         ),
         NewCloth(
@@ -210,7 +210,7 @@ console.log(
           599,
           "Elevate your wardrobe with our Essential Blue Premium T-shirt – a beacon of luxury and style. Meticulously crafted from premium materials, this shirt offers a level of comfort that complements its rich blue hue. Redefine casual elegance with this essential addition to your collection.",
           genderArray[0],
-          "https://adamp28.sg-host.com/wp-content/uploads/2018/10/men-neon-blue-tshirt-gildan-adult-front1.jpg",
+          "https://n.nordstrommedia.com/id/sr3/2d43964c-1062-48a6-abb3-59dcbe4b7c40.jpeg",
           categoryArray[1],
         ),
         NewCloth(
