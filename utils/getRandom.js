@@ -2,7 +2,6 @@ function getRandom(arr, n) {
     var result = new Array(n),
         len = arr.length,
         taken = new Array(len);
-    console.log(result);
     if (n > len)
         throw new RangeError("getRandom: more elements taken than available");
     while (n--) {
