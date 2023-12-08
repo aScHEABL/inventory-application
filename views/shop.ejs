@@ -1,5 +1,39 @@
 <%# views/shop.ejs %>
 
 <% extend('layout') %>
+<script>
+    console.log("This is scripts for shopping page.");
 
-<h1><%= title %></h1>
+    // function main() {
+    //     loadFromLocalstorage();
+    //     setActiveTabs();
+    // }
+
+    // function loadFromLocalstorage() {
+    //     const selectedGender = localStorage.getItem("selectedGender");
+    //     if (selectedGender === undefined) localStorage.setItem("male");
+
+    //     const selectedCategory = localStorage.getItem("selectedCategory");
+    //     // if (selectedCategory === undefined) localStorage.setItem();
+    // }
+
+    // function setActiveTabs() {
+
+    // }
+
+</script>
+
+<% const selectedGender = 
+
+<ul role="tablist" class="tabs tabs-boxed w-60">
+    <% for (let i = 0; i < genders_array.length; i++) { %>
+        <li role="tab" class="tab <%= selectedGender === genders_array[i].name ? 'tab-active' : ''  %>">
+            <%= genders_array[i].name %>
+        </li>
+    <% } %>
+</ul>
+<!-- <div role="tablist" class="tabs tabs-boxed w-60">
+    <a role="tab" class="tab">Tab 1</a>
+    <a role="tab" class="tab tab-active">Tab 2</a>
+    <a role="tab" class="tab">Tab 3</a>
+</div> -->
