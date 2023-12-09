@@ -1,34 +1,37 @@
 <%# views/shop.ejs %>
 
 <% extend('layout') %>
-<script>
-    console.log("This is scripts for shopping page.");
 
-    // function main() {
-    //     loadFromLocalstorage();
-    //     setActiveTabs();
+<script defer>
+    // const globalDomElements = {
+    //     maleBtn: document.getElementById("male"),
+    //     femaleBtn: document.getElementById("female"),
     // }
 
-    // function loadFromLocalstorage() {
-    //     const selectedGender = localStorage.getItem("selectedGender");
-    //     if (selectedGender === undefined) localStorage.setItem("male");
-
-    //     const selectedCategory = localStorage.getItem("selectedCategory");
-    //     // if (selectedCategory === undefined) localStorage.setItem();
-    // }
-
-    // function setActiveTabs() {
-
-    // }
-
+    // globalDomElements.maleBtn.addEventListener("click", () => {
+    //     console.log("Male button has been clicked!");
+    // })
+    document.addEventListener("DOMContentLoaded", function() {
+        const maleBtn = document.getElementById("male");
+        console.log(maleBtn);
+    })
 </script>
 
-<% const selectedGender = 
-
-<ul role="tablist" class="tabs tabs-boxed w-60">
+<ul class="menu menu-horizontal bg-gray-600 ml-6">
     <% for (let i = 0; i < genders_array.length; i++) { %>
-        <li role="tab" class="tab <%= selectedGender === genders_array[i].name ? 'tab-active' : ''  %>">
-            <%= genders_array[i].name %>
+        <li class="text-lg">
+            <a id="<%= genders_array[i].name === 'male' ? 'male' : 'female' %>">
+                <%= genders_array[i].name === "male" ? "Men" : "Women" %>
+            </a>
+        </li>
+    <% } %>
+</ul>
+<ul class="menu menu-horizontal bg-gray-600 ml-6">
+    <% for (let i = 0; i < categories_array.length; i++) { %>
+        <li class="text-lg">
+            <a>
+                <%= categories_array[i].name %>
+            </a>
         </li>
     <% } %>
 </ul>
