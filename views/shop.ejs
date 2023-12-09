@@ -3,21 +3,31 @@
 <% extend('layout') %>
 
 <script defer>
-    // const globalDomElements = {
-    //     maleBtn: document.getElementById("male"),
-    //     femaleBtn: document.getElementById("female"),
-    // }
+    document.addEventListener("DOMContentLoaded", () => {
+        const genders_array = JSON.parse('<%- JSON.stringify(genders_array) %>');
 
-    // globalDomElements.maleBtn.addEventListener("click", () => {
-    //     console.log("Male button has been clicked!");
-    // })
-    document.addEventListener("DOMContentLoaded", function() {
-        const maleBtn = document.getElementById("male");
-        console.log(maleBtn);
+        
+        const genderTabs = document.querySelector("#gender-tabs");
+        const allTabs = Array.from(document.querySelectorAll(".tab"));
+        // First find the tab with tab-active class, then store its index in the array.
+        let activeTabIndex = allTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
+
+        allTabs.forEach((domElement, index) => {
+            domElement.addEventListener("click", () => {
+               if (index === activeTabIndex) {
+                    return;
+               } else if (index !== activeTabIndex) {
+                    allTabs[activeTabIndex].classList.toggle("tab-active");
+                    activeTabIndex = index;
+                    allTabs[index].classList.toggle("tab-active");
+               }
+            })
+        })
+
     })
 </script>
 
-<ul class="menu menu-horizontal bg-gray-600 ml-6">
+<!-- <ul class="menu menu-horizontal bg-gray-600 ml-6">
     <% for (let i = 0; i < genders_array.length; i++) { %>
         <li class="text-lg">
             <a id="<%= genders_array[i].name === 'male' ? 'male' : 'female' %>">
@@ -34,9 +44,19 @@
             </a>
         </li>
     <% } %>
-</ul>
-<!-- <div role="tablist" class="tabs tabs-boxed w-60">
-    <a role="tab" class="tab">Tab 1</a>
-    <a role="tab" class="tab tab-active">Tab 2</a>
-    <a role="tab" class="tab">Tab 3</a>
-</div> -->
+</ul> -->
+<div role="tablist" class="tabs tabs-boxed w-60 gap-4 tabs-large" id="gender-tabs">
+    <% for (let i = 0; i < genders_array.length; i++) { %>
+        <a role="tab" class="tab <%= (i === 0) ? 'tab-active' : '' %>" id="<%= genders_array[i].name %>">
+            <%= genders_array[i].name === "male" ? "Men" : "Women" %>
+        </a>
+    <% } %>
+</div>
+
+<div role="tablist" class="tabs tabs-boxed w-100" id="category-tabs">
+    <% for (let i = 0; i < categories_array.length; i++) { %>
+        <a role="tab" class="tab">
+            <%= categories_array[i].name %>
+        </a>
+    <% } %>
+</div>
