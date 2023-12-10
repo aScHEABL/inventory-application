@@ -47,8 +47,8 @@ console.log(
     const result = await Size.insertMany(sizeArray);
     console.log("Sizes inserted successfully:", result);
 
-    await createCategory();
     await createGender();
+    await createCategory();
     await createCloth();
     await createClothInstance();
     console.log("Debug: Closing mongoose");
@@ -131,9 +131,10 @@ console.log(
     console.log(`Added cart: ${cart.user}`);
   }
 
-  async function NewCategory(index, nameValue) {
+  async function NewCategory(index, nameValue, genderRef) {
     const category = new Category({
       name: nameValue,
+      gender: genderRef,
     })
 
     try {
@@ -352,10 +353,14 @@ console.log(
   async function createCategory() {
     console.log("Adding category...");
     await Promise.all([
-      NewCategory(0, "t-shirt"),
-      NewCategory(1, "polo"),
-      NewCategory(2, "sweater"),
-      NewCategory(3, "jacket"),
-      NewCategory(4, "shirt"),
+      NewCategory(0, "t-shirt", genderArray[0]),
+      NewCategory(1, "polo", genderArray[0]),
+      NewCategory(2, "sweater", genderArray[0]),
+      NewCategory(3, "jacket", genderArray[0]),
+      NewCategory(4, "shirt", genderArray[0]),
+      NewCategory(5, "top", genderArray[1]),
+      NewCategory(6, "dress", genderArray[1]),
+      NewCategory(7, "sweater", genderArray[1]),
+      NewCategory(8, "jacket", genderArray[1]),
     ])
   }
