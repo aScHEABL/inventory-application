@@ -5,25 +5,44 @@
 <script defer>
     document.addEventListener("DOMContentLoaded", () => {
         const genders_array = JSON.parse('<%- JSON.stringify(genders_array) %>');
+        const categories_array = JSON.parse('<%- JSON.stringify(categories_array) %>');
+        console.log(categories_array);
 
-        
-        const genderTabs = document.querySelector("#gender-tabs");
-        const allTabs = Array.from(document.querySelectorAll(".tab"));
+        const genderTabs = Array.from(document.querySelector("#gender-tabs-wrapper").getElementsByTagName("a"));
+        const categoryTabs = Array.from(document.querySelector("#category-tabs-wrapper").getElementsByTagName("a"));
         // First find the tab with tab-active class, then store its index in the array.
-        let activeTabIndex = allTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
+        let activeGenderTabIndex = genderTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
+        let activeCategoryTabIndex = genderTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
 
-        allTabs.forEach((domElement, index) => {
+        genderTabs.forEach((domElement, index) => {
             domElement.addEventListener("click", () => {
-               if (index === activeTabIndex) {
+                // If the tab is already selected, then do nothing;
+                // If user click non-selected tab, the current
+                // selected tab is deselected, then the selected tab is assigned with the user selected tab.
+               if (index === activeGenderTabIndex) {
                     return;
-               } else if (index !== activeTabIndex) {
-                    allTabs[activeTabIndex].classList.toggle("tab-active");
-                    activeTabIndex = index;
-                    allTabs[index].classList.toggle("tab-active");
+               } else if (index !== activeGenderTabIndex) {
+                    genderTabs[activeGenderTabIndex].classList.toggle("tab-active");
+                    activeGenderTabIndex = index;
+                    genderTabs[index].classList.toggle("tab-active");
+
+                    // (index === 0) ? 
                }
             })
         })
 
+        // Same as above function.
+        categoryTabs.forEach((domElement, index) => {
+            domElement.addEventListener("click", () => {
+                if (index === activeCategoryTabIndex) {
+                    return;
+                } else if (index !== activeCategoryTabIndex) {
+                    categoryTabs[activeCategoryTabIndex].classList.toggle("tab-active");
+                    activeCategoryTabIndex = index;
+                    categoryTabs[index].classList.toggle("tab-active");
+                }
+            })
+        })
     })
 </script>
 
@@ -45,18 +64,22 @@
         </li>
     <% } %>
 </ul> -->
-<div role="tablist" class="tabs tabs-boxed w-60 gap-4 tabs-large" id="gender-tabs">
+<% const capitalizeFirstLetter = (string) => { %>
+<%    return string.charAt(0).toUpperCase() + string.slice(1); %>
+<% } %>
+
+<div role="tablist" class="tabs tabs-bordered w-60 tabs-lg" id="gender-tabs-wrapper">
     <% for (let i = 0; i < genders_array.length; i++) { %>
-        <a role="tab" class="tab <%= (i === 0) ? 'tab-active' : '' %>" id="<%= genders_array[i].name %>">
+        <a role="tab" class="tab <%= (i === 0) ? 'tab-active' : '' %>" id="<%= genders_array[i].name %>-tab">
             <%= genders_array[i].name === "male" ? "Men" : "Women" %>
         </a>
     <% } %>
 </div>
 
-<div role="tablist" class="tabs tabs-boxed w-100" id="category-tabs">
+<div role="tablist" class="tabs tabs-bordered tabs-lg w-[36rem]" id="category-tabs-wrapper">
     <% for (let i = 0; i < categories_array.length; i++) { %>
-        <a role="tab" class="tab">
-            <%= categories_array[i].name %>
+        <a role="tab" class="tab <%= (i === 0) ? 'tab-active' : '' %>" id="<%= categories_array[i].name %>-tab">
+            <%= capitalizeFirstLetter(categories_array[i].name) %>
         </a>
     <% } %>
 </div>
