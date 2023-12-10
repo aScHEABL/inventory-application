@@ -5,14 +5,16 @@
 <script defer>
     document.addEventListener("DOMContentLoaded", () => {
         const genders_array = JSON.parse('<%- JSON.stringify(genders_array) %>');
-        const categories_array = JSON.parse('<%- JSON.stringify(categories_array) %>');
-        console.log(categories_array);
-
-        const genderTabs = Array.from(document.querySelector("#gender-tabs-wrapper").getElementsByTagName("a"));
-        const categoryTabs = Array.from(document.querySelector("#category-tabs-wrapper").getElementsByTagName("a"));
+        // const categories_array = JSON.parse('<%- JSON.stringify(categories_array) %>');
+        const maleCategories_array = JSON.parse('<%- JSON.stringify(maleCategories_array) %>');
+        const femaleCategories_array = JSON.parse('<%- JSON.stringify(femaleCategories_array) %>');
+        
+        const genderTabsWrapper = document.querySelector("#gender-tabs-wrapper");
+        const categoryTabsWrapper = document.querySelector("#category-tabs-wrapper");
+        const genderTabs = Array.from(genderTabsWrapper.getElementsByTagName("a"));
+        
         // First find the tab with tab-active class, then store its index in the array.
         let activeGenderTabIndex = genderTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
-        let activeCategoryTabIndex = genderTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
 
         genderTabs.forEach((domElement, index) => {
             domElement.addEventListener("click", () => {
@@ -26,14 +28,46 @@
                     activeGenderTabIndex = index;
                     genderTabs[index].classList.toggle("tab-active");
 
-                    // (index === 0) ? 
+                    (index === 0) ? populateCategories(0) : populateCategories(1);
                }
             })
         })
 
-        // Same as above function.
-        categoryTabs.forEach((domElement, index) => {
-            domElement.addEventListener("click", () => {
+
+        function populateCategories(genderIndex) {
+            if (!categoryTabsWrapper.hasChildNodes) {
+                return;
+            } else if (categoryTabsWrapper.hasChildNodes) {
+                const allAnchorElements = Array.from(categoryTabsWrapper.getElementsByTagName("a"));
+                allAnchorElements.forEach((item, index) => {
+                    item.removeEventListener("click", handleClickCallback);
+                })
+                // allAnchorElements.removeEventListener("click", handleClickCallback);
+            }
+            categoryTabsWrapper.replaceChildren();
+            const categories_array = (genderIndex === 0) ? maleCategories_array : femaleCategories_array;
+            // categories_array.forEach((item, index) => {
+            //     const aElement = document.createElement("a");
+            //     index === 0 ? aElement.classList.toggle("tab-active") : null;
+            //     aElement.classList.toggle("tab");
+            //     aElement.textContent = item.name;
+            //     categoryTabsWrapper.appendChild(aElement);
+            // })
+
+            const categories = categories_array.map((item, index) => {
+                const aElement = document.createElement("a");
+                index === 0 ? aElement.classList.toggle("tab-active") : null;
+                aElement.classList.toggle("tab");
+                aElement.textContent = item.name;
+                return aElement;
+            })
+            categoryTabsWrapper.replaceChildren(...categories);
+            
+            const categoryTabs = Array.from(categoryTabsWrapper.getElementsByTagName("a"));
+            let activeCategoryTabIndex = categoryTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
+            categoryTabs.forEach((domElement, index) => domElement.addEventListener("click", handleClickCallback(index)))
+
+            function handleClickCallback(index) {
                 if (index === activeCategoryTabIndex) {
                     return;
                 } else if (index !== activeCategoryTabIndex) {
@@ -41,30 +75,15 @@
                     activeCategoryTabIndex = index;
                     categoryTabs[index].classList.toggle("tab-active");
                 }
-            })
-        })
+            }
+        }
+        
+        // Append male categories on page load. 0 === "male", 1 === "female"
+        populateCategories(0);
     })
 </script>
 
-<!-- <ul class="menu menu-horizontal bg-gray-600 ml-6">
-    <% for (let i = 0; i < genders_array.length; i++) { %>
-        <li class="text-lg">
-            <a id="<%= genders_array[i].name === 'male' ? 'male' : 'female' %>">
-                <%= genders_array[i].name === "male" ? "Men" : "Women" %>
-            </a>
-        </li>
-    <% } %>
-</ul>
-<ul class="menu menu-horizontal bg-gray-600 ml-6">
-    <% for (let i = 0; i < categories_array.length; i++) { %>
-        <li class="text-lg">
-            <a>
-                <%= categories_array[i].name %>
-            </a>
-        </li>
-    <% } %>
-</ul> -->
-<% const capitalizeFirstLetter = (string) => { %>
+<% function capitalizeFirstLetter(string) { %>
 <%    return string.charAt(0).toUpperCase() + string.slice(1); %>
 <% } %>
 
@@ -77,9 +96,11 @@
 </div>
 
 <div role="tablist" class="tabs tabs-bordered tabs-lg w-[36rem]" id="category-tabs-wrapper">
-    <% for (let i = 0; i < categories_array.length; i++) { %>
+    
+</div>
+
+<!-- <% for (let i = 0; i < categories_array.length; i++) { %>
         <a role="tab" class="tab <%= (i === 0) ? 'tab-active' : '' %>" id="<%= categories_array[i].name %>-tab">
             <%= capitalizeFirstLetter(categories_array[i].name) %>
         </a>
-    <% } %>
-</div>
+    <% } %> -->
