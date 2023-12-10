@@ -33,8 +33,13 @@
             })
         })
 
+        function capitalizeFirstLetter(string) { 
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
 
         function populateCategories(genderIndex) {
+            // When user clicks new gender tab, all of previous rendered <a> tags and their events need to be removed.
+            // Then re-render again based on the new gender.
             if (!categoryTabsWrapper.hasChildNodes) {
                 return;
             } else if (categoryTabsWrapper.hasChildNodes) {
@@ -42,34 +47,30 @@
                 allAnchorElements.forEach((item, index) => {
                     item.removeEventListener("click", handleClickCallback);
                 })
-                // allAnchorElements.removeEventListener("click", handleClickCallback);
             }
             categoryTabsWrapper.replaceChildren();
-            const categories_array = (genderIndex === 0) ? maleCategories_array : femaleCategories_array;
-            // categories_array.forEach((item, index) => {
-            //     const aElement = document.createElement("a");
-            //     index === 0 ? aElement.classList.toggle("tab-active") : null;
-            //     aElement.classList.toggle("tab");
-            //     aElement.textContent = item.name;
-            //     categoryTabsWrapper.appendChild(aElement);
-            // })
 
+            // Render categories based on the gender index.
+            const categories_array = (genderIndex === 0) ? maleCategories_array : femaleCategories_array;
             const categories = categories_array.map((item, index) => {
                 const aElement = document.createElement("a");
                 index === 0 ? aElement.classList.toggle("tab-active") : null;
                 aElement.classList.toggle("tab");
-                aElement.textContent = item.name;
+                aElement.textContent = capitalizeFirstLetter(item.name);
                 return aElement;
             })
             categoryTabsWrapper.replaceChildren(...categories);
             
+            // Change the active category tab when the user clicks on the tab.
             const categoryTabs = Array.from(categoryTabsWrapper.getElementsByTagName("a"));
             let activeCategoryTabIndex = categoryTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
-            categoryTabs.forEach((domElement, index) => domElement.addEventListener("click", handleClickCallback(index)))
+            categoryTabs.forEach((domElement, index) => {
+                domElement.addEventListener("click", () => handleClickCallback(index));
+            })
 
             function handleClickCallback(index) {
                 if (index === activeCategoryTabIndex) {
-                    return;
+                        return;
                 } else if (index !== activeCategoryTabIndex) {
                     categoryTabs[activeCategoryTabIndex].classList.toggle("tab-active");
                     activeCategoryTabIndex = index;
