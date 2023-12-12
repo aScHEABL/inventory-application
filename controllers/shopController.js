@@ -11,6 +11,11 @@ exports.main = asyncHandler(async(req, res, next) => {
 
     const maleCategories_array = await Category.find({ gender: maleGender }).exec();
     const femaleCategories_array = await Category.find({ gender: femaleGender }).exec();
+
+    const maleClothesPromises = maleCategories_array.map(async (item, index) => {
+        return await Cloth.find({ category: item }).exec();
+    })
+    const maleClothes_array = await Promise.all(maleClothesPromises);
     
     const allCategories_array = await Category.find({}).exec();
 
@@ -20,6 +25,7 @@ exports.main = asyncHandler(async(req, res, next) => {
             genders_array: allGenders_array,
             maleCategories_array: maleCategories_array,
             femaleCategories_array: femaleCategories_array,
+            maleClothes_array: maleClothes_array,
             categories_array: allCategories_array,
         })
 })

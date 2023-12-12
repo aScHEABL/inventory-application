@@ -8,6 +8,7 @@
         // const categories_array = JSON.parse('<%- JSON.stringify(categories_array) %>');
         const maleCategories_array = JSON.parse('<%- JSON.stringify(maleCategories_array) %>');
         const femaleCategories_array = JSON.parse('<%- JSON.stringify(femaleCategories_array) %>');
+        const maleClothes_array = JSON.parse('<%- JSON.stringify(maleClothes_array) %>');
         
         const genderTabsWrapper = document.querySelector("#gender-tabs-wrapper");
         const categoryTabsWrapper = document.querySelector("#category-tabs-wrapper");
@@ -70,7 +71,7 @@
 
             function handleClickCallback(index) {
                 if (index === activeCategoryTabIndex) {
-                        return;
+                    return;
                 } else if (index !== activeCategoryTabIndex) {
                     categoryTabs[activeCategoryTabIndex].classList.toggle("tab-active");
                     activeCategoryTabIndex = index;
