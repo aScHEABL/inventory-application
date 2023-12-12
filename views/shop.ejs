@@ -5,12 +5,11 @@
 <script defer>
     document.addEventListener("DOMContentLoaded", () => {
         const genders_array = JSON.parse('<%- JSON.stringify(genders_array) %>');
-        // const categories_array = JSON.parse('<%- JSON.stringify(categories_array) %>');
         const maleCategories_array = JSON.parse('<%- JSON.stringify(maleCategories_array) %>');
         const femaleCategories_array = JSON.parse('<%- JSON.stringify(femaleCategories_array) %>');
         const maleClothes_array = <%- JSON.stringify(maleClothes_array) %>;
         const femaleClothes_array = <%- JSON.stringify(femaleClothes_array) %>;
-        console.log(femaleClothes_array);
+        console.log(maleClothes_array);
         
         const genderTabsWrapper = document.querySelector("#gender-tabs-wrapper");
         const categoryTabsWrapper = document.querySelector("#category-tabs-wrapper");
