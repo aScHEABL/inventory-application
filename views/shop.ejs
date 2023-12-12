@@ -8,7 +8,9 @@
         // const categories_array = JSON.parse('<%- JSON.stringify(categories_array) %>');
         const maleCategories_array = JSON.parse('<%- JSON.stringify(maleCategories_array) %>');
         const femaleCategories_array = JSON.parse('<%- JSON.stringify(femaleCategories_array) %>');
-        const maleClothes_array = JSON.parse('<%- JSON.stringify(maleClothes_array) %>');
+        const maleClothes_array = <%- JSON.stringify(maleClothes_array) %>;
+        const femaleClothes_array = <%- JSON.stringify(femaleClothes_array) %>;
+        console.log(femaleClothes_array);
         
         const genderTabsWrapper = document.querySelector("#gender-tabs-wrapper");
         const categoryTabsWrapper = document.querySelector("#category-tabs-wrapper");
@@ -90,19 +92,13 @@
 <% } %>
 
 <div role="tablist" class="tabs tabs-bordered w-60 tabs-lg" id="gender-tabs-wrapper">
-    <% for (let i = 0; i < genders_array.length; i++) { %>
-        <a role="tab" class="tab <%= (i === 0) ? 'tab-active' : '' %>" id="<%= genders_array[i].name %>-tab">
-            <%= genders_array[i].name === "male" ? "Men" : "Women" %>
+    <% genders_array.forEach((item, index) => { %>
+        <a role="tab" class="tab <%= (index === 0) ? 'tab-active' : '' %>" id="<%= genders_array[index].name %>-tab">
+            <%= genders_array[index].name === "male" ? "Men" : "Women" %>
         </a>
-    <% } %>
+    <% }) %>
 </div>
 
 <div role="tablist" class="tabs tabs-bordered tabs-lg w-fit" id="category-tabs-wrapper">
     
 </div>
-
-<!-- <% for (let i = 0; i < categories_array.length; i++) { %>
-        <a role="tab" class="tab <%= (i === 0) ? 'tab-active' : '' %>" id="<%= categories_array[i].name %>-tab">
-            <%= capitalizeFirstLetter(categories_array[i].name) %>
-        </a>
-    <% } %> -->
