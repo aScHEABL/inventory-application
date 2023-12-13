@@ -13,6 +13,7 @@
         
         const genderTabsWrapper = document.querySelector("#gender-tabs-wrapper");
         const categoryTabsWrapper = document.querySelector("#category-tabs-wrapper");
+        const mainWrapper = document.querySelector("#main-wrapper");
         const genderTabs = Array.from(genderTabsWrapper.getElementsByTagName("a"));
         
         // First find the tab with tab-active class, then store its index in the array.
@@ -69,7 +70,7 @@
             categoryTabs.forEach((domElement, index) => {
                 domElement.addEventListener("click", () => handleClickCallback(index));
             })
-
+            
             function handleClickCallback(index) {
                 if (index === activeCategoryTabIndex) {
                     return;
@@ -79,6 +80,7 @@
                     categoryTabs[index].classList.toggle("tab-active");
                 }
             }
+            const cloth_array = 
         }
         
         // Append male categories on page load. 0 === "male", 1 === "female"
@@ -101,3 +103,7 @@
 <div role="tablist" class="tabs tabs-bordered tabs-lg w-fit" id="category-tabs-wrapper">
     
 </div>
+
+<main id="main-wrapper">
+
+</main>
