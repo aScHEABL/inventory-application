@@ -419,8 +419,26 @@ console.log(
           "Smooth, rich leather secures the style-staple status of this biker jacket in a classic silhouette.",
           genderArray[1],
           "https://n.nordstrommedia.com/id/sr3/8c4d4da9-3820-4ad0-999a-da03ced9cd78.jpeg",
-          categoryArray[5],
+          categoryArray[8],
         ),
+        NewCloth(
+          27,
+          "Onion Quilted Bomber Jacket",
+          1199,
+          "Traditional quilting and plush high-pile-fleece lining bring the cozy vibes to this classic bomber jacket designed in a roomy fit for comfortable layering.",
+          genderArray[1],
+          "https://n.nordstrommedia.com/id/sr3/46f968ad-f26f-49a0-9c28-584abcf1918d.jpeg",
+          categoryArray[8],
+        ),
+        NewCloth(
+          28,
+          "Kyra Corduroy Trucker Jacket",
+          1399,
+          "This version of the beloved trucker jacket is cut from stretchy cotton corduroy and rendered with puffed shoulders in a modern shade.",
+          genderArray[1],
+          "https://n.nordstrommedia.com/id/sr3/e1304c18-93a2-44a8-ad64-9a575ff3375d.jpeg",
+          categoryArray[8],
+        )
     ])
   }
 
