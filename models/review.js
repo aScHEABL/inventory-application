@@ -13,4 +13,6 @@ ReviewSchema.virtual("url").get(function() {
     return `/review/${this._id}`;
 })
 
+ReviewSchema.set('toJSON', { virtuals: true });
+
 module.exports = mongoose.model("Review", ReviewSchema);

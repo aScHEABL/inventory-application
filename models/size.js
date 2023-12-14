@@ -9,4 +9,10 @@ const SizeSchema = new Schema({
     },
 });
 
+SizeSchema.virtual("url").get(function() {
+    return `/size/${this._id}`;
+})
+
+SizeSchema.set('toJSON', { virtuals: true });
+
 module.exports = mongoose.model("Size", SizeSchema);

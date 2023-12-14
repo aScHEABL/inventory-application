@@ -10,4 +10,6 @@ ColorSchema.virtual("url").get(function() {
     return `/inventory/color/${this._id}`;
 })
 
+ColorSchema.set('toJSON', { virtuals: true });
+
 module.exports = mongoose.model("Color", ColorSchema);

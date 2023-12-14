@@ -15,4 +15,6 @@ ClothSchema.virtual("url").get(function() {
     return `/inventory/cloth/${this._id}`;
 })
 
+ClothSchema.set('toJSON', { virtuals: true });
+
 module.exports = mongoose.model("Cloth", ClothSchema);

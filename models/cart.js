@@ -11,4 +11,6 @@ CartSchema.virtual("url").get(function() {
     return `/user/cart/${this._id}`;
 })
 
+CartSchema.set('toJSON', { virtuals: true });
+
 module.exports = mongoose.model("Cart", CartSchema);
