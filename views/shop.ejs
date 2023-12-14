@@ -9,7 +9,7 @@
         const femaleCategories_array = JSON.parse('<%- JSON.stringify(femaleCategories_array) %>');
         const maleClothes_array = <%- JSON.stringify(maleClothes_array) %>;
         const femaleClothes_array = <%- JSON.stringify(femaleClothes_array) %>;
-        console.log(maleClothes_array);
+        // console.log(maleClothes_array);
         
         const genderTabsWrapper = document.querySelector("#gender-tabs-wrapper");
         const categoryTabsWrapper = document.querySelector("#category-tabs-wrapper");
@@ -55,9 +55,11 @@
 
             // Render categories based on the gender index.
             const categories_array = (genderIndex === 0) ? maleCategories_array : femaleCategories_array;
+            const clothes_array = (genderIndex === 0) ? maleClothes_array : femaleClothes_array;
             const categories = categories_array.map((item, index) => {
                 const aElement = document.createElement("a");
                 index === 0 ? aElement.classList.toggle("tab-active") : null;
+                populateProduct(0);
                 aElement.classList.toggle("tab");
                 aElement.textContent = capitalizeFirstLetter(item.name);
                 return aElement;
@@ -80,7 +82,33 @@
                     categoryTabs[index].classList.toggle("tab-active");
                 }
             }
-            const cloth_array = 
+
+            function populateProduct(activeTabIndex) {
+                clothes_array[activeTabIndex].forEach((item, index) => {
+                    const cardWrapper = document.createElement("div");
+                    const figure = document.createElement("figure");
+                    const img = document.createElement("img");
+                    const cardBodyDiv = document.createElement("div");
+                    const h2 = document.createElement("h2");
+                    const p = document.createElement("p");
+                    const cardActionDiv = document.createElement("div");
+                    const cardButton = document.createElement("button");
+
+                    cardWrapper.classList.add("card", "w-96", "bg-base-100", "shadow-xl");
+                    img.setAttribute("src", item.imageURL);
+                    cardBodyDiv.classList.add("card-body");
+                    h2.classList.add("card-title");
+                    cardActionDiv.classList.add("card-actions", "justify-end");
+                    cardButton.classList.add("btn", "btn-primary");
+
+                    mainWrapper.append(cardWrapper);
+                    cardWrapper.append(figure, cardBodyDiv);
+                    figure.append(img);
+                    cardBodyDiv.append(h2, p, cardActionDiv);
+                    cardActionDiv.append(cardButton);
+                });
+            }
+            
         }
         
         // Append male categories on page load. 0 === "male", 1 === "female"
