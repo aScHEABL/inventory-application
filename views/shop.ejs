@@ -59,7 +59,6 @@
             const categories = categories_array.map((item, index) => {
                 const aElement = document.createElement("a");
                 index === 0 ? aElement.classList.toggle("tab-active") : null;
-                populateProduct(0);
                 aElement.classList.toggle("tab");
                 aElement.textContent = capitalizeFirstLetter(item.name);
                 return aElement;
@@ -69,21 +68,28 @@
             // Change the active category tab when the user clicks on the tab.
             const categoryTabs = Array.from(categoryTabsWrapper.getElementsByTagName("a"));
             let activeCategoryTabIndex = categoryTabs.findIndex((domElement) => domElement.classList.contains("tab-active"));
+            populateProduct(activeCategoryTabIndex);
             categoryTabs.forEach((domElement, index) => {
                 domElement.addEventListener("click", () => handleClickCallback(index));
             })
             
             function handleClickCallback(index) {
+                // If user clicks the same category tab, nothing happens.
                 if (index === activeCategoryTabIndex) {
                     return;
+                // If user clicks on a different category tab
                 } else if (index !== activeCategoryTabIndex) {
                     categoryTabs[activeCategoryTabIndex].classList.toggle("tab-active");
                     activeCategoryTabIndex = index;
                     categoryTabs[index].classList.toggle("tab-active");
+
+                    mainWrapper.replaceChildren();
+                    populateProduct(activeCategoryTabIndex);
                 }
             }
 
             function populateProduct(activeTabIndex) {
+                console.log(clothes_array[activeTabIndex]);
                 clothes_array[activeTabIndex].forEach((item, index) => {
                     const cardWrapper = document.createElement("div");
                     const figure = document.createElement("figure");
@@ -92,6 +98,7 @@
                     const h2 = document.createElement("h2");
                     const p = document.createElement("p");
                     const cardActionDiv = document.createElement("div");
+                    const cardBadge = document.createElement("div");
                     const cardButton = document.createElement("button");
 
                     cardWrapper.classList.add("card", "w-96", "bg-base-100", "shadow-xl");
@@ -99,13 +106,18 @@
                     cardBodyDiv.classList.add("card-body");
                     h2.classList.add("card-title");
                     cardActionDiv.classList.add("card-actions", "justify-end");
+                    cardBadge.classList.add("badge", "badge-outline");
                     cardButton.classList.add("btn", "btn-primary");
+
+                    h2.textContent = item.name;
+                    p.textContent = item.description;
+                    cardBadge.textContent = item.price;
 
                     mainWrapper.append(cardWrapper);
                     cardWrapper.append(figure, cardBodyDiv);
                     figure.append(img);
                     cardBodyDiv.append(h2, p, cardActionDiv);
-                    cardActionDiv.append(cardButton);
+                    cardActionDiv.append(cardBadge, cardButton);
                 });
             }
             
@@ -132,6 +144,6 @@
     
 </div>
 
-<main id="main-wrapper">
+<main id="main-wrapper" class="flex flex-wrap justify-center gap-16">
 
 </main>
