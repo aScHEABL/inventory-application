@@ -31,6 +31,7 @@
                     activeGenderTabIndex = index;
                     genderTabs[index].classList.toggle("tab-active");
 
+                    mainWrapper.replaceChildren();
                     (index === 0) ? populateCategories(0) : populateCategories(1);
                }
             })
@@ -92,14 +93,13 @@
                 console.log(clothes_array[activeTabIndex]);
                 clothes_array[activeTabIndex].forEach((item, index) => {
                     const cardWrapper = document.createElement("div");
-                    const figure = document.createElement("figure");
+                    const anchor = document.createElement("a");
                     const img = document.createElement("img");
                     const cardBodyDiv = document.createElement("div");
                     const h2 = document.createElement("h2");
                     const p = document.createElement("p");
                     const cardActionDiv = document.createElement("div");
                     const cardBadge = document.createElement("div");
-                    const cardButton = document.createElement("button");
 
                     cardWrapper.classList.add("card", "w-96", "bg-base-100", "shadow-xl");
                     img.setAttribute("src", item.imageURL);
@@ -107,17 +107,17 @@
                     h2.classList.add("card-title");
                     cardActionDiv.classList.add("card-actions", "justify-end");
                     cardBadge.classList.add("badge", "badge-outline");
-                    cardButton.classList.add("btn", "btn-primary");
 
+                    anchor.setAttribute("href", item.url);
                     h2.textContent = item.name;
                     p.textContent = item.description;
-                    cardBadge.textContent = item.price;
+                    cardBadge.textContent = `\$ ${item.price} TWD`
 
                     mainWrapper.append(cardWrapper);
-                    cardWrapper.append(figure, cardBodyDiv);
-                    figure.append(img);
+                    cardWrapper.append(anchor, cardBodyDiv);
+                    anchor.append(img);
                     cardBodyDiv.append(h2, p, cardActionDiv);
-                    cardActionDiv.append(cardBadge, cardButton);
+                    cardActionDiv.append(cardBadge);
                 });
             }
             
