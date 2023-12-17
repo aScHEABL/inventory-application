@@ -12,7 +12,7 @@ const ClothSchema = new Schema({
   });
 
 ClothSchema.virtual("url").get(function() {
-    return `/inventory/cloth/${this._id}`;
+    return `/shop/inventory/cloth/${this._id}`;
 })
 
 ClothSchema.set('toJSON', { virtuals: true });

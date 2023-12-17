@@ -7,7 +7,7 @@ const GenderSchema = new Schema({
 });
 
 GenderSchema.virtual("url").get(function() {
-    return `/inventory/gender/${this._id}`;
+    return `/shop/inventory/gender/${this._id}`;
 })
 
 GenderSchema.set('toJSON', { virtuals: true });

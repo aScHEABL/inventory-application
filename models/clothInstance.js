@@ -8,7 +8,7 @@ const ClothInstanceSchema = new Schema({
   });
 
 ClothInstanceSchema.virtual("url").get(function() {
-  return `/inventory/clothinstance/${this._id}`;
+  return `/shop/inventory/clothinstance/${this._id}`;
 })
 
 ClothInstanceSchema.set('toJSON', { virtuals: true });

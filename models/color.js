@@ -7,7 +7,7 @@ const ColorSchema = new Schema({
 });
 
 ColorSchema.virtual("url").get(function() {
-    return `/inventory/color/${this._id}`;
+    return `/shop/inventory/color/${this._id}`;
 })
 
 ColorSchema.set('toJSON', { virtuals: true });

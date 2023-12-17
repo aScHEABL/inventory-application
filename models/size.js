@@ -10,7 +10,7 @@ const SizeSchema = new Schema({
 });
 
 SizeSchema.virtual("url").get(function() {
-    return `/size/${this._id}`;
+    return `/shop/inventory/size/${this._id}`;
 })
 
 SizeSchema.set('toJSON', { virtuals: true });

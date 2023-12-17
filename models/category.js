@@ -8,7 +8,7 @@ const CategorySchema = new Schema({
 });
 
 CategorySchema.virtual("url").get(function() {
-    return `/inventory/category/${this._id}`;
+    return `/shop/inventory/category/${this._id}`;
 })
 
 CategorySchema.set('toJSON', { virtuals: true });
