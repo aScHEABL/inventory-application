@@ -1,22 +1,11 @@
 const Cloth = require("../models/cloth");
+const ClothInstance = require("../models/clothInstance");
 const Category = require("../models/category");
 const Gender = require("../models/gender");
 
 const asyncHandler = require("express-async-handler");
 
 exports.main = asyncHandler(async(req, res, next) => {
-    // const allGenders_array = await Gender.find({}).exec();
-    // const maleGender = await Gender.findOne({ name: "male" }).exec();
-    // const femaleGender = await Gender.findOne({ name: "female" }).exec();
-    
-
-    // const maleCategories_array = await Category.find({ gender: maleGender }).exec();
-    // const femaleCategories_array = await Category.find({ gender: femaleGender }).exec();
-
-    // const maleClothes_array = await Promise.all(maleCategories_array.map(async (item) => await Cloth.find({ category: item }).exec()));
-    // const femaleClothes_array = await Promise.all(femaleCategories_array.map(async (item) => await Cloth.find({ category: item }).exec()));
-    
-    // const allCategories_array = await Category.find({}).exec();
     const [
         allGenders_array,
         maleGender,
@@ -52,4 +41,25 @@ exports.main = asyncHandler(async(req, res, next) => {
             maleClothes_array: maleClothes_array,
             femaleClothes_array: femaleClothes_array,
         })
+})
+
+exports.cloth_details = asyncHandler(async (req, res, next) => {
+    const [cloth, clothInstance] = await Promise.all([
+        Cloth.findById(req.params.id).exec(),
+        ClothInstance.find({ Cloth }).exec(),
+    ])
+
+    if (cloth === null) {
+        // Query returned no result.
+        const err = new Error("Cloth not found");
+        err.status = 404;
+        return (err);
+    }
+
+    res.render("cloth_detail", {
+        test: req.params.id,
+        title: cloth.name,
+        // cloth: cloth,
+        // clothInstance: clothInstance,
+    })
 })
