@@ -46,7 +46,8 @@ exports.main = asyncHandler(async(req, res, next) => {
 exports.cloth_details = asyncHandler(async (req, res, next) => {
     const [cloth, clothInstance] = await Promise.all([
         Cloth.findById(req.params.id).exec(),
-        ClothInstance.find({ Cloth }).exec(),
+        // ClothInstance.find({ Cloth: req.params.id }).exec(),
+        ClothInstance.find().exec(),
     ])
 
     if (cloth === null) {
@@ -59,7 +60,7 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
     res.render("cloth_detail", {
         test: req.params.id,
         title: cloth.name,
-        // cloth: cloth,
-        // clothInstance: clothInstance,
+        cloth: cloth,
+        clothInstance: clothInstance,
     })
 })

@@ -2,5 +2,16 @@
 
 <% extend('layout') %>
 
+<script defer>
+    const cloth = <%- JSON.stringify(cloth) %>;
+    const clothInstance = <%- JSON.stringify(clothInstance) %>;
+    console.log(cloth);
+    console.log(clothInstance);
+</script>
+
 <h1><%= test %></h1>
-<h1><%= title %></h1>
+<h1><%= title %></h1> 
+
+<div class="flex">
+    <!-- <img src="" /> -->
+</div>
