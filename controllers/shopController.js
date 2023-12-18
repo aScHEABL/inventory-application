@@ -44,10 +44,11 @@ exports.main = asyncHandler(async(req, res, next) => {
 })
 
 exports.cloth_details = asyncHandler(async (req, res, next) => {
+    const clothID = req.params.id;
+
     const [cloth, clothInstance] = await Promise.all([
-        Cloth.findById(req.params.id).exec(),
-        // ClothInstance.find({ Cloth: req.params.id }).exec(),
-        ClothInstance.find().exec(),
+        Cloth.findById(clothID).exec(),
+        ClothInstance.find({ cloth: clothID }).exec(),
     ])
 
     if (cloth === null) {
