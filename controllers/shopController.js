@@ -2,6 +2,7 @@ const Cloth = require("../models/cloth");
 const ClothInstance = require("../models/clothInstance");
 const Category = require("../models/category");
 const Gender = require("../models/gender");
+const Size = require("../models/size");
 
 const asyncHandler = require("express-async-handler");
 
@@ -48,7 +49,7 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
 
     const [cloth, clothInstance] = await Promise.all([
         Cloth.findById(clothID).exec(),
-        ClothInstance.find({ cloth: clothID }).exec(),
+        ClothInstance.find({ cloth: clothID }).populate("size").exec(),
     ])
 
     if (cloth === null) {
