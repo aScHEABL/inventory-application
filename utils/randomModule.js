@@ -1,4 +1,4 @@
-function getRandom(arr, n) {
+exports.getRandomItemsFromArray = function(arr, n) {
     var result = new Array(n),
         len = arr.length,
         taken = new Array(len);
@@ -12,4 +12,8 @@ function getRandom(arr, n) {
     return result;
 }
 
-module.exports = getRandom;
+exports.getRandomIntFromRange = function(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
