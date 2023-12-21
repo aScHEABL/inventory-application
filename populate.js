@@ -102,7 +102,7 @@ console.log(
   }
 
   async function NewClothInstance(index, clothReference, sizeType) {
-    const size = await Size.findOne({ type: sizeType });
+    const size = await Size.findOne({ name: sizeType });
 
     const clothInstance = new ClothInstance({
       cloth: clothReference,
@@ -448,16 +448,24 @@ console.log(
   async function createClothInstance() {
     console.log("Adding cloth instances");
   
-    // Create an array of promises for cloth instances
-    const clothInstancePromises = clotheArray.flatMap(async (item) => {
+    // Create an array to store promises for cloth instances
+    const clothInstancePromises = [];
+  
+    // Iterate over each cloth item
+    for (const item of clotheArray) {
       const randomInt = getRandomIntFromRange(3, 15);
-      
-      // Map each instance creation to a promise
-      return Array.from({ length: randomInt }, async (_, index) => {
-        const randomSize = getRandomItemsFromArray(sizeArray, 1);
-        await NewClothInstance(index, item, randomSize);
+  
+      // Create an array to store promises for each cloth instance of the current item
+      const promises = Array.from({ length: randomInt }, (_, index) => {
+        const sizes = ["small", "medium", "large", "extra-large"];
+        const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+        console.log(randomSize);
+        return NewClothInstance(index, item, randomSize);
       });
-    });
+  
+      // Concatenate the promises to the outer array
+      clothInstancePromises.push(...promises);
+    }
   
     // Wait for all cloth instances to be created
     await Promise.all(clothInstancePromises);
