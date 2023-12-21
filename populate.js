@@ -1,5 +1,9 @@
 #! /usr/bin/env node
 
+const randomModule = require("./utils/randomModule");
+const getRandomIntFromRange = randomModule.getRandomIntFromRange;
+const getRandomItemsFromArray = randomModule.getRandomItemsFromArray;
+
 console.log(
     'This script populates data to mongoDB for inventory app.'
   );
@@ -18,10 +22,10 @@ console.log(
   const Size = require("./models/size");
   
   const sizeArray = [
-    { type: 'small' },
-    { type: 'medium' },
-    { type: 'large' },
-    { type: 'extra-large' },
+    { name: 'small' },
+    { name: 'medium' },
+    { name: 'large' },
+    { name: 'extra-large' },
   ];
   const cartArray = [];
   const categoryArray = [];
@@ -444,6 +448,10 @@ console.log(
 
   async function createClothInstance() {
     console.log("Adding cloth instances");
+
+    clotheArray.forEach((item, index) => {
+      const randomInt = getRandomIntFromRange(3, 15);
+    })
     await Promise.all([
       NewClothInstance(0, clotheArray[0], "small"),
       NewClothInstance(1, clotheArray[0], "small"),
