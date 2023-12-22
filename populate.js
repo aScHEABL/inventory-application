@@ -2,7 +2,6 @@
 
 const randomModule = require("./utils/randomModule");
 const getRandomIntFromRange = randomModule.getRandomIntFromRange;
-const getRandomItemsFromArray = randomModule.getRandomItemsFromArray;
 
 console.log(
     'This script populates data to mongoDB for inventory app.'
