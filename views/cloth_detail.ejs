@@ -9,9 +9,36 @@
     console.log(clothInstance);
 </script>
 
-<h1><%= test %></h1>
-<h1><%= title %></h1> 
+<% function capitalizeFirstLetter(string) { %>
+<%    return string.charAt(0).toUpperCase() + string.slice(1); %>
+<% } %>
 
-<div class="flex">
-    <!-- <img src="" /> -->
+<h1><%= test %></h1>
+
+<div class="flex justify-center gap-4">
+    <div class="basis-[30%]">
+        <img src="<%= cloth.imageURL %>" />
+    </div>
+    <div class="bg-neutral-800 basis-[40%] rounded px-6 py-4">
+        <div class="rating">
+            <input type="radio" name="rating-1" class="mask mask-star" />
+            <input type="radio" name="rating-1" class="mask mask-star" checked />
+            <input type="radio" name="rating-1" class="mask mask-star" />
+            <input type="radio" name="rating-1" class="mask mask-star" />
+            <input type="radio" name="rating-1" class="mask mask-star" />
+        </div>
+        <h1 class="text-2xl"><%= cloth.name %></h1>
+        <div class="flex gap-4 mb-6">
+            <h2>$ <%= cloth.price %> TWD</h2>
+            <h2>VAT included</h2>
+        </div>
+        <p class="mb-6"><%= cloth.description %></p>
+        <select class="select select-bordered w-full max-w-xs rounded-xl text-xl">
+            <option disabled selected class="text-xl">Size</option>
+            <% const sizeArray = ["small", "medium", "large", "extra-large"] %>
+            <% sizeArray.forEach((outterItem) => { %>
+                <option><%= capitalizeFirstLetter(outterItem) %></option>
+            <% }) %>
+        </select>
+    </div>
 </div>
