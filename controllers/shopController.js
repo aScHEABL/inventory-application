@@ -52,6 +52,10 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
         ClothInstance.find({ cloth: clothID }).populate("size").exec(),
     ])
 
+    const [sizeArray, sizeStock] = await Promise.all([
+        
+    ])
+
     if (cloth === null) {
         // Query returned no result.
         const err = new Error("Cloth not found");
