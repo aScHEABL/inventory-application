@@ -1,13 +1,9 @@
 <%# views/cloth_detail.ejs %>
 
 <% extend('layout') %>
-
-<script defer>
-    const cloth = <%- JSON.stringify(cloth) %>;
-    const clothInstance = <%- JSON.stringify(clothInstance) %>;
-    console.log(cloth);
-    console.log(clothInstance);
-</script>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
 
 <% function capitalizeFirstLetter(string) { %>
 <%    return string.charAt(0).toUpperCase() + string.slice(1); %>
@@ -22,23 +18,36 @@
     <div class="bg-neutral-800 basis-[40%] rounded px-6 py-4">
         <div class="rating">
             <input type="radio" name="rating-1" class="mask mask-star" />
+            <input type="radio" name="rating-1" class="mask mask-star" />
+            <input type="radio" name="rating-1" class="mask mask-star" />
             <input type="radio" name="rating-1" class="mask mask-star" checked />
             <input type="radio" name="rating-1" class="mask mask-star" />
-            <input type="radio" name="rating-1" class="mask mask-star" />
-            <input type="radio" name="rating-1" class="mask mask-star" />
         </div>
-        <h1 class="text-2xl"><%= cloth.name %></h1>
+        <h1 class="text-4xl mb-6"><%= cloth.name %></h1>
         <div class="flex gap-4 mb-6">
-            <h2>$ <%= cloth.price %> TWD</h2>
-            <h2>VAT included</h2>
+            <h2 class="text-2xl">$ <%= cloth.price %> TWD</h2>
+            <h2 class="text-2xl">VAT included</h2>
         </div>
-        <p class="mb-6"><%= cloth.description %></p>
-        <select class="select select-bordered w-full max-w-xs rounded-xl text-xl">
+        <p class="mb-6 text-2xl"><%= cloth.description %></p>
+        <select class="select select-bordered w-full max-w-xs rounded-xl text-xl mb-36">
             <option disabled selected class="text-xl">Size</option>
-            <% const sizeArray = ["small", "medium", "large", "extra-large"] %>
-            <% sizeArray.forEach((outterItem) => { %>
-                <option><%= capitalizeFirstLetter(outterItem) %></option>
+            <% (Object.entries(sizeCounts)).map(([key, value]) => { %>
+                <option><%= capitalizeFirstLetter(key) %> - <%= value %> left</option>
             <% }) %>
         </select>
+        <div>
+            <button type="button" class="btn bg-teal-800 w-full rounded text-white text-xl mb-6">
+                <span class="material-symbols-outlined">
+                    shopping_cart
+                </span>
+                ADD TO CART
+            </button>
+            <button type="button" class="btn btn-outline w-full rounded text-xl">
+                <span class="material-symbols-outlined">
+                    favorite
+                </span>
+                ADD TO WISH LIST
+            </button>
+        </div>
     </div>
 </div>
