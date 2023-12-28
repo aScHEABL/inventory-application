@@ -78,3 +78,13 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
         sizeCounts: sizeCounts,
     })
 })
+
+exports.category_create_get = asyncHandler(async (req, res, next) => {
+
+})
+
+exports.cloth_create_get = asyncHandler(async (req, res, next) => {
+    res.render("cloth_create", {
+        title: "Create Cloth Page",
+    });
+})

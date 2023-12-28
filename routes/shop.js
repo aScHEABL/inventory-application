@@ -8,4 +8,6 @@ router.get("/", shopController.main);
 
 router.get("/inventory/cloth/:id", shopController.cloth_details);
 
+router.get("/inventory/create/cloth", shopController.cloth_create_get);
+
 module.exports = router;
