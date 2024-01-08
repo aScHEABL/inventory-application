@@ -80,11 +80,14 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
 })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 exports.inventory_overview = asyncHandler(async (req, res, next) => {
     res.render("inventory_overview", {
         title: "Inventory overview",
     })
 =======
+=======
+>>>>>>> 8e83c5e6d54bd6b065f7805026435ce819c78097
 exports.category_create_get = asyncHandler(async (req, res, next) => {
 
 })
@@ -93,5 +96,8 @@ exports.cloth_create_get = asyncHandler(async (req, res, next) => {
     res.render("cloth_create", {
         title: "Create Cloth Page",
     });
+<<<<<<< HEAD
+>>>>>>> 8e83c5e6d54bd6b065f7805026435ce819c78097
+=======
 >>>>>>> 8e83c5e6d54bd6b065f7805026435ce819c78097
 })
