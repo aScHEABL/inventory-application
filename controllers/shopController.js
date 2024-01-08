@@ -52,9 +52,16 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
         ClothInstance.find({ cloth: clothID }).populate("size").exec(),
     ])
 
-    const [sizeArray, sizeStock] = await Promise.all([
-        
-    ])
+    // Create an object to store the counts
+    const sizeCounts = {};
+
+    // Count the occurrences of each size
+    clothInstance.forEach((item) => {
+        const sizeName = item.size.name;
+
+        // If the size is not in sizeCounts, initialize it to 1, else increment by 1
+        sizeCounts[sizeName] = (sizeCounts[sizeName] || 0) + 1;
+    });
 
     if (cloth === null) {
         // Query returned no result.
@@ -68,11 +75,23 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
         title: cloth.name,
         cloth: cloth,
         clothInstance: clothInstance,
+        sizeCounts: sizeCounts,
     })
 })
 
+<<<<<<< HEAD
 exports.inventory_overview = asyncHandler(async (req, res, next) => {
     res.render("inventory_overview", {
         title: "Inventory overview",
     })
+=======
+exports.category_create_get = asyncHandler(async (req, res, next) => {
+
+})
+
+exports.cloth_create_get = asyncHandler(async (req, res, next) => {
+    res.render("cloth_create", {
+        title: "Create Cloth Page",
+    });
+>>>>>>> 8e83c5e6d54bd6b065f7805026435ce819c78097
 })
