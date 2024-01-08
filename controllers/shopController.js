@@ -70,3 +70,9 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
         clothInstance: clothInstance,
     })
 })
+
+exports.inventory_overview = asyncHandler(async (req, res, next) => {
+    res.render("inventory_overview", {
+        title: "Inventory overview",
+    })
+})
