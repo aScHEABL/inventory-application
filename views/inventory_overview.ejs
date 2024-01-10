@@ -2,4 +2,20 @@
 
 <% extend('layout') %>
 
-<h1>This is inventory overview page</h1>
+<script defer>
+    const collection_array = <%- JSON.stringify(collection_array) %>;
+    console.log(collection_array);
+</script>
+
+<main class="px-12 h-screen">
+    <h1 class="text-3xl">Dashboard</h1>
+    <div class="grid grid-cols-5 gap-4">
+        <% collection_array.forEach((item, index) => { %>
+            <div class="w-20 h-20 bg-slate-700">
+                <a href="<%= item.url %>">
+                    <%= item.name %>
+                </a>
+            </div>
+        <% }) %>
+    </div>
+</main>
