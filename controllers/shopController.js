@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Cloth = require("../models/cloth");
 const ClothInstance = require("../models/clothInstance");
 const Category = require("../models/category");
@@ -80,8 +81,18 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
 })
 
 exports.inventory_overview = asyncHandler(async (req, res, next) => {
+    // const collection_array = Object.entries(mongoose.connection.collections);
+    const db = mongoose.connection.db;
+    const collectionRaw_array = await db.listCollections().toArray();
+    const collection_array = collectionRaw_array.map((item) => {
+        return {
+            ...item,
+            url: req.originalUrl + "/" + item.name,
+        }
+    })
     res.render("inventory_overview", {
         title: "Inventory overview",
+        collection_array,
     })
 })
 
