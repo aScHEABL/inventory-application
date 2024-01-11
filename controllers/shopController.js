@@ -92,11 +92,11 @@ exports.inventory_overview = asyncHandler(async (req, res, next) => {
                 return '<span class="material-symbols-outlined scale-[2]">width</span>';
             case 'genders':
                 return '<span class="material-symbols-outlined scale-[2]">transgender</span>';
-            case 'clothinstances':
+            case 'clothInstances':
                 return '<span class="material-symbols-outlined scale-[2]">deployed_code</span>';
             case 'carts':
                 return '<span class="material-symbols-outlined scale-[2]">shopping_cart</span>';
-            case 'cloths':
+            case 'clothings':
                 return '<span class="material-symbols-outlined scale-[2]">apparel</span>';
             case 'categories':
                 return '<span class="material-symbols-outlined scale-[2]">category</span>';
@@ -110,14 +110,14 @@ exports.inventory_overview = asyncHandler(async (req, res, next) => {
     // const collection_array = Object.entries(mongoose.connection.collections);
     const db = mongoose.connection.db;
     const collectionRaw_array = await db.listCollections().toArray();
-    const collection_array = collectionRaw_array.map((item) => {
+    const collection_array = collectionRaw_array.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((item) => {
         return {
             ...item,
             url: req.originalUrl + "/" + item.name,
             icon: insertIcon(item.name)
         }
     })
-    res.render("inventory_overview", {
+    res.render("overview", {
         title: "Inventory overview",
         collection_array,
     })
