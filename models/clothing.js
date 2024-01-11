@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const ClothSchema = new Schema({
+const ClothingSchema = new Schema({
     name: { type: String, required: true, unique: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
@@ -11,10 +11,10 @@ const ClothSchema = new Schema({
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
   });
 
-ClothSchema.virtual("url").get(function() {
-    return `/shop/inventory/cloth/${this._id}`;
+ClothingSchema.virtual("url").get(function() {
+    return `/shop/inventory/clothing/${this._id}`;
 })
 
-ClothSchema.set('toJSON', { virtuals: true });
+ClothingSchema.set('toJSON', { virtuals: true });
 
-module.exports = mongoose.model("Cloth", ClothSchema);
+module.exports = mongoose.model("Clothing", ClothingSchema);

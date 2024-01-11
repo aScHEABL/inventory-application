@@ -17,10 +17,10 @@
 
 <section>
   <ul class="flex justify-center gap-8">
-    <% for (let i = 0; i < clothes_array.length; i++) { %>
-      <li class="tooltip tooltip-success" data-tip="<%= clothes_array[i].name %>">
-        <a href="<%= clothes_array[i].url %>">
-          <img class="w-[20rem]" src="<%= clothes_array[i].imageURL %>" />
+    <% for (let i = 0; i < clothing_array.length; i++) { %>
+      <li class="tooltip tooltip-success" data-tip="<%= clothing_array[i].name %>">
+        <a href="<%= clothing_array[i].url %>">
+          <img class="w-[20rem]" src="<%= clothing_array[i].imageURL %>" />
         </a>
       </li>
     <% } %>

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Cloth = require("../models/cloth");
+const Clothing = require("../models/clothing");
 const ClothInstance = require("../models/clothInstance");
 const Category = require("../models/category");
 const Gender = require("../models/gender");
@@ -30,8 +30,8 @@ exports.main = asyncHandler(async(req, res, next) => {
         maleClothes_array,
         femaleClothes_array,
     ] = await Promise.all([
-        Promise.all(maleCategories_array.map(async (item) => await Cloth.find({ category: item }).exec())),
-        Promise.all(femaleCategories_array.map(async (item) => await Cloth.find({ category: item }).exec())),
+        Promise.all(maleCategories_array.map(async (item) => await Clothing.find({ category: item }).exec())),
+        Promise.all(femaleCategories_array.map(async (item) => await Clothing.find({ category: item }).exec())),
     ])
 
     res.render("shop",
@@ -45,12 +45,12 @@ exports.main = asyncHandler(async(req, res, next) => {
         })
 })
 
-exports.cloth_details = asyncHandler(async (req, res, next) => {
-    const clothID = req.params.id;
+exports.clothing_details = asyncHandler(async (req, res, next) => {
+    const clothingID = req.params.id;
 
-    const [cloth, clothInstance] = await Promise.all([
-        Cloth.findById(clothID).exec(),
-        ClothInstance.find({ cloth: clothID }).populate("size").exec(),
+    const [clothing, clothInstance] = await Promise.all([
+        Clothing.findById(clothingID).exec(),
+        ClothInstance.find({ clothing: clothingID }).populate("size").exec(),
     ])
 
     // Create an object to store the counts
@@ -64,23 +64,49 @@ exports.cloth_details = asyncHandler(async (req, res, next) => {
         sizeCounts[sizeName] = (sizeCounts[sizeName] || 0) + 1;
     });
 
-    if (cloth === null) {
+    if (clothing === null) {
         // Query returned no result.
         const err = new Error("Cloth not found");
         err.status = 404;
         return (err);
     }
 
-    res.render("cloth_detail", {
+    res.render("clothing_details", {
         test: req.params.id,
-        title: cloth.name,
-        cloth: cloth,
+        title: clothing.name,
+        clothing: clothing,
         clothInstance: clothInstance,
         sizeCounts: sizeCounts,
     })
 })
 
 exports.inventory_overview = asyncHandler(async (req, res, next) => {
+
+    function insertIcon(name) {
+        switch (name) {
+            case 'users':
+                return '<span class="material-symbols-outlined scale-[2]">group</span>';
+            case 'orders':
+                return '<span class="material-symbols-outlined scale-[2]">list_alt</span>';
+            case 'sizes':
+                return '<span class="material-symbols-outlined scale-[2]">width</span>';
+            case 'genders':
+                return '<span class="material-symbols-outlined scale-[2]">transgender</span>';
+            case 'clothinstances':
+                return '<span class="material-symbols-outlined scale-[2]">deployed_code</span>';
+            case 'carts':
+                return '<span class="material-symbols-outlined scale-[2]">shopping_cart</span>';
+            case 'cloths':
+                return '<span class="material-symbols-outlined scale-[2]">apparel</span>';
+            case 'categories':
+                return '<span class="material-symbols-outlined scale-[2]">category</span>';
+            case 'reviews':
+                return '<span class="material-symbols-outlined scale-[2]">reviews</span>';
+            default:
+                return 'test';
+        }
+    }
+
     // const collection_array = Object.entries(mongoose.connection.collections);
     const db = mongoose.connection.db;
     const collectionRaw_array = await db.listCollections().toArray();
@@ -88,6 +114,7 @@ exports.inventory_overview = asyncHandler(async (req, res, next) => {
         return {
             ...item,
             url: req.originalUrl + "/" + item.name,
+            icon: insertIcon(item.name)
         }
     })
     res.render("inventory_overview", {

@@ -1,4 +1,4 @@
-const Cloth = require("../models/cloth");
+const Clothing = require("../models/clothing");
 
 const randomModule = require("../utils/randomModule");
 const getRandomItemsFromArray = randomModule.getRandomItemsFromArray;
@@ -6,12 +6,12 @@ const getRandomItemsFromArray = randomModule.getRandomItemsFromArray;
 const asyncHandler = require("express-async-handler");
 
 exports.featuredProducts = asyncHandler(async(req, res, next) => {
-    const allClothes_array = await Cloth.find({}).exec();
+    const allClothing_array = await Clothing.find({}).exec();
 
-    const featuredProducts_array = getRandomItemsFromArray(allClothes_array, 4);
+    const featuredProducts_array = getRandomItemsFromArray(allClothing_array, 4);
     res.render("index",
         {
             title: 'Fake Fashion E-Store',
-            clothes_array: featuredProducts_array,
+            clothing_array: featuredProducts_array,
         })
 })

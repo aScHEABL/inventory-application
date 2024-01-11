@@ -12,7 +12,7 @@ console.log(
   
   const Cart = require("./models/cart");
   const Category = require("./models/category");
-  const Cloth = require("./models/cloth");
+  const Clothing = require("./models/clothing");
   const ClothInstance = require("./models/clothInstance");
   const Gender = require("./models/gender");
   const Order = require("./models/order");
@@ -28,7 +28,7 @@ console.log(
   ];
   const cartArray = [];
   const categoryArray = [];
-  const clotheArray = [];
+  const clothingArray = [];
   const clothInstanceArray = [];
   const genderArray = [];
   const orderArray = [];
@@ -52,7 +52,7 @@ console.log(
 
     await createGender();
     await createCategory();
-    await createCloth();
+    await createClothing();
     await createClothInstance();
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
@@ -73,7 +73,7 @@ console.log(
     console.log(`Added user: ${user.username}`);
   }
 
-  async function NewCloth(
+  async function NewClothing(
     index,
     nameValue, 
     priceValue, 
@@ -83,7 +83,7 @@ console.log(
     categoryValue, 
   ) {
 
-    const cloth = new Cloth({
+    const clothing = new Clothing({
       name: nameValue, 
       price: priceValue, 
       description: descriptionValue, 
@@ -92,19 +92,19 @@ console.log(
       category: categoryValue, 
     });
     try {
-      await cloth.save();
-      clotheArray[index] = cloth;
-      console.log(`Added cloth: ${cloth}`);
+      await clothing.save();
+      clothingArray[index] = clothing;
+      console.log(`Added cloth: ${clothing}`);
     } catch(error) {
       console.error(error.message);
     }
   }
 
-  async function NewClothInstance(index, clothReference, sizeType) {
+  async function NewClothInstance(index, clothingReference, sizeType) {
     const size = await Size.findOne({ name: sizeType });
 
     const clothInstance = new ClothInstance({
-      cloth: clothReference,
+      clothing: clothingReference,
       size: size,
     });
 
@@ -177,10 +177,10 @@ console.log(
 
   // Creation of database entries
 
-  async function createCloth() {
+  async function createClothing() {
     console.log("Adding clothes...");
     await Promise.all([
-        NewCloth(
+        NewClothing(
           0,
           "Essential White T-Shirt", 
           399, 
@@ -189,7 +189,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/6bf50448-af78-4e38-847a-056c2fdf3bfc.jpeg",
           categoryArray[0],
         ),
-        NewCloth(
+        NewClothing(
           1,
           "White Tight Fit Premium T-Shirt",
           599,
@@ -198,7 +198,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/7e47f4b0-7a29-4ede-80ff-837acef60dd0.jpeg",
           categoryArray[0],
         ),
-        NewCloth(
+        NewClothing(
           2,
           "Essential Red Polo-Shirt",
           449,
@@ -207,7 +207,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/2a5612cc-ae06-48ec-aae7-32d10084f22a.jpeg",
           categoryArray[1],
         ),
-        NewCloth(
+        NewClothing(
           3,
           "Essential Blue T-Shirt",
           599,
@@ -216,7 +216,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/2d43964c-1062-48a6-abb3-59dcbe4b7c40.jpeg",
           categoryArray[1],
         ),
-        NewCloth(
+        NewClothing(
           4,
           "Dri-FIT Legend Yellow T-shirt",
           399,
@@ -225,7 +225,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/650e1b8b-8798-4b16-a970-5be728d534bc.jpeg",
           categoryArray[0],
         ),
-        NewCloth(
+        NewClothing(
           5,
           "Essential Red T-shirt",
           399,
@@ -234,7 +234,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/0157e95a-2038-4c0b-9652-e0810b5e6b3c.jpeg",
           categoryArray[0],
         ),
-        NewCloth(
+        NewClothing(
           6,
           "White Short-Sleeves Shirt",
           599,
@@ -243,7 +243,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/fa4e72e4-c3f2-4125-8f0b-67a8e68fb09f.jpeg",
           categoryArray[4],
         ),
-        NewCloth(
+        NewClothing(
           7,
           "Generation Herringbone Stretch Button-Up Shirt",
           699,
@@ -252,7 +252,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/c68b9618-c602-4709-8442-2d36fbcad500.jpeg",
           categoryArray[4],
         ),
-        NewCloth(
+        NewClothing(
           8,
           "White Long-Sleeves Shirt",
           699,
@@ -261,7 +261,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/0e708db1-e827-4821-b5e0-e29ad8799e23.jpeg",
           categoryArray[4],
         ),
-        NewCloth(
+        NewClothing(
           9,
           "Crimson Short-Sleeves Shirt",
           699,
@@ -270,7 +270,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/dc946b00-9a27-45cd-a471-edb2a0785247.jpeg",
           categoryArray[4],
         ),
-        NewCloth(
+        NewClothing(
           10,
           "Merrick Bay Quarter Zip Sweater",
           1499,
@@ -279,7 +279,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/50931893-937c-48ff-8ac5-8e2457fb264e.jpeg",
           categoryArray[2]
         ),
-        NewCloth(
+        NewClothing(
           11,
           "Washable Black Merino Crewneck Sweater",
           1499,
@@ -288,7 +288,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/31ebe3fb-0a36-4ab6-a120-390f09f36526.jpeg",
           categoryArray[2],
         ),
-        NewCloth(
+        NewClothing(
           12,
           "Washable Blue Merino Crewneck Sweater",
           1499,
@@ -297,7 +297,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/7a2cbff1-bdc7-4e5e-931e-5d114c960863.jpeg",
           categoryArray[2],
         ),
-        NewCloth(
+        NewClothing(
           13,
           "Cashmere Red Crewneck Sweater",
           1499,
@@ -306,7 +306,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/1591dd29-a800-4cef-8a3f-7ee85b8de8f8.jpeg",
           categoryArray[2],
         ),
-        NewCloth(
+        NewClothing(
           14,
           "Green Hood Parka",
           2299,
@@ -315,7 +315,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/c38b66ab-8c67-4c21-9446-1ac6b555d22e.jpeg",
           categoryArray[3],
         ),
-        NewCloth(
+        NewClothing(
           15,
           "Blue Jeans Jacket",
           2299,
@@ -324,7 +324,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/f551c8b7-7533-4acb-a063-5d8fbb342e78.jpeg",
           categoryArray[3],
         ),
-        NewCloth(
+        NewClothing(
           16,
           "Satin Button-Up Shirt",
           1440,
@@ -333,7 +333,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/42ee1026-1d1a-41b2-a1ce-4f8490098fd1.jpeg",
           categoryArray[5],
         ),
-        NewCloth(
+        NewClothing(
           17,
           "Colt Long Sleeve Waffle Knit Henley",
           1779,
@@ -342,7 +342,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/cce5a28d-2b22-4850-aed9-422eed13309a.jpeg",
           categoryArray[7],
         ),
-        NewCloth(
+        NewClothing(
           18,
           "Gold Rush Sequin Top",
           2499,
@@ -351,7 +351,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/0e5baa9c-73d1-43d8-8e5b-97fe79f6f0e4.jpeg",
           categoryArray[9],
         ),
-        NewCloth(
+        NewClothing(
           19,
           "Sequin Wrap Top",
           2399,
@@ -360,7 +360,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/94a7f426-226b-44d1-8da3-7efd6b5fd132.jpeg",
           categoryArray[9],
         ),
-        NewCloth(
+        NewClothing(
           20,
           "Sequin Long Sleeve Top",
           2799,
@@ -369,7 +369,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/1b0d76fe-b32b-4645-8417-8c7dc4c7dc69.jpeg",
           categoryArray[9],
         ),
-        NewCloth(
+        NewClothing(
           21,
           "Long Sleeve Crushed Velvet Blazer Dress",
           3399,
@@ -378,7 +378,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/2b65daba-ec6b-402b-b886-454ed55f6413.jpeg",
           categoryArray[6],
         ),
-        NewCloth(
+        NewClothing(
           22,
           "Axel Sequin Embellished Cocktail Dress",
           6999,
@@ -387,7 +387,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/f62056bc-98db-4dac-a67b-95312d6ec19d.jpeg",
           categoryArray[6],
         ),
-        NewCloth(
+        NewClothing(
           23,
           "Rib Three-Quarter Sleeve Sweater Dress",
           3499,
@@ -396,7 +396,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/b3421168-d181-4e9e-b5e4-38614cdaca65.jpeg",
           categoryArray[6],
         ),
-        NewCloth(
+        NewClothing(
           24,
           "Solid Button-Up Shirt",
           1199,
@@ -405,7 +405,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/9de6c1c8-04fc-429c-95df-70473f684c41.jpeg",
           categoryArray[5]
         ),
-        NewCloth(
+        NewClothing(
           25,
           "Mandarin Collar Silk Blouse",
           4999,
@@ -414,7 +414,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/83f1c17e-869a-4a8c-96eb-995e18d037b7.jpeg",
           categoryArray[5],
         ),
-        NewCloth(
+        NewClothing(
           26,
           "Dalby Leather Biker Jacket",
           1699,
@@ -423,7 +423,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/8c4d4da9-3820-4ad0-999a-da03ced9cd78.jpeg",
           categoryArray[8],
         ),
-        NewCloth(
+        NewClothing(
           27,
           "Onion Quilted Bomber Jacket",
           1199,
@@ -432,7 +432,7 @@ console.log(
           "https://n.nordstrommedia.com/id/sr3/46f968ad-f26f-49a0-9c28-584abcf1918d.jpeg",
           categoryArray[8],
         ),
-        NewCloth(
+        NewClothing(
           28,
           "Kyra Corduroy Trucker Jacket",
           1399,
@@ -451,7 +451,7 @@ console.log(
     const clothInstancePromises = [];
   
     // Iterate over each cloth item
-    for (const item of clotheArray) {
+    for (const item of clothingArray) {
       const randomInt = getRandomIntFromRange(3, 15);
   
       // Create an array to store promises for each cloth instance of the current item
