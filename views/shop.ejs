@@ -9,7 +9,6 @@
         const femaleCategories_array = JSON.parse('<%- JSON.stringify(femaleCategories_array) %>');
         const maleClothes_array = <%- JSON.stringify(maleClothes_array) %>;
         const femaleClothes_array = <%- JSON.stringify(femaleClothes_array) %>;
-        // console.log(maleClothes_array);
         
         const genderTabsWrapper = document.querySelector("#gender-tabs-wrapper");
         const categoryTabsWrapper = document.querySelector("#category-tabs-wrapper");
@@ -90,7 +89,6 @@
             }
 
             function populateProduct(activeTabIndex) {
-                console.log(clothes_array[activeTabIndex]);
                 clothes_array[activeTabIndex].forEach((item, index) => {
                     const cardWrapper = document.createElement("div");
                     const anchor = document.createElement("a");
