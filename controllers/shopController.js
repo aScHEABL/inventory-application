@@ -80,7 +80,7 @@ exports.clothing_details = asyncHandler(async (req, res, next) => {
     })
 })
 
-exports.inventory_overview = asyncHandler(async (req, res, next) => {
+exports.overview = asyncHandler(async (req, res, next) => {
 
     function insertIcon(name) {
         switch (name) {
@@ -120,6 +120,24 @@ exports.inventory_overview = asyncHandler(async (req, res, next) => {
     res.render("overview", {
         title: "Inventory overview",
         collection_array,
+    })
+})
+
+exports.overview_clothings = asyncHandler(async (req, res, next) => {
+    const clothingRaw_array = await Clothing.find({}).sort({ name: 1 }).populate("category gender").exec()
+
+    // Add the count of ClothInstances for each Clothing
+    const clothing_array = await Promise.all(clothingRaw_array.map(async (clothing) => {
+        const clothInstanceCount = await ClothInstance.countDocuments({ clothing: clothing._id });
+        return {
+            ...clothing.toObject(),
+            clothInstanceCount,
+        };
+    }));
+
+    res.render("overview_clothings", {
+        title: "Clothings Overview",
+        clothing_array,
     })
 })
 

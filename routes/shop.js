@@ -8,9 +8,9 @@ router.get("/", shopController.main);
 
 router.get("/inventory/clothing/:id", shopController.clothing_details);
 
-router.get("/inventory/overview", shopController.inventory_overview);
+router.get("/inventory/overview", shopController.overview);
 
-// router.get("/inventory/overview/cloth", shopController.cloth_create_get);
+router.get("/inventory/overview/clothings", shopController.overview_clothings);
 
 // router.get("/inventory/cloth", shopController.cloth_create_get);
 
