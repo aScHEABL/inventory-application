@@ -144,9 +144,11 @@ exports.overview_clothings = asyncHandler(async (req, res, next) => {
 exports.update_clothings = asyncHandler(async (req, res, next) => {
     const clothingID = req.params.id;
 
+    const clothingDetails = await Clothing.findById(clothingID).exec()
+
     res.render("update_clothings", {
         title: "Updating Clothing Page",
-        clothingID,
+        clothingDetails,
     })
 })
 
