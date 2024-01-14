@@ -141,6 +141,15 @@ exports.overview_clothings = asyncHandler(async (req, res, next) => {
     })
 })
 
+exports.update_clothings = asyncHandler(async (req, res, next) => {
+    const clothingID = req.params.id;
+
+    res.render("update_clothings", {
+        title: "Updating Clothing Page",
+        clothingID,
+    })
+})
+
 exports.category_create_get = asyncHandler(async (req, res, next) => {
 
 })

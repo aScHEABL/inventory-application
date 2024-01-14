@@ -12,9 +12,14 @@ const ClothingSchema = new Schema({
   });
 
 ClothingSchema.virtual("url").get(function() {
-    return `/shop/inventory/clothing/${this._id}`;
+    return `/shop/inventory/clothings/${this._id}`;
+})
+
+ClothingSchema.virtual("updateProductURL").get(function() {
+  return `/shop/inventory/clothings/update/${this._id}`;
 })
 
 ClothingSchema.set('toJSON', { virtuals: true });
+ClothingSchema.set('toObject', { virtuals: true });
 
 module.exports = mongoose.model("Clothing", ClothingSchema);
