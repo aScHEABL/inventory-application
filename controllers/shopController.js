@@ -141,15 +141,45 @@ exports.overview_clothings = asyncHandler(async (req, res, next) => {
     })
 })
 
-exports.update_clothings = asyncHandler(async (req, res, next) => {
+exports.update_clothings_get = asyncHandler(async (req, res, next) => {
     const clothingID = req.params.id;
 
-    const clothingDetails = await Clothing.findById(clothingID).exec()
+    const [
+        clothingDetails,
+        genders_array,
+        maleGender,
+        femaleGender,
+    ] = await Promise.all([
+        Clothing.findById(clothingID).exec(),
+        Gender.find({}).sort({ name: -1 }).exec(),
+        Gender.findOne({ name: "male" }).exec(),
+        Gender.findOne({ name: "female" }).exec(),  
+    ])
+
+    const [
+        maleCategories_array,
+        femaleCategories_array,
+    ] = await Promise.all([
+        Category.find({ gender: maleGender }).sort({ name: 1 }).exec(),
+        Category.find({ gender: femaleGender }).sort({ name: 1 }).exec(),
+    ])
+
 
     res.render("update_clothings", {
         title: "Updating Clothing Page",
         clothingDetails,
+        genders_array,
+        maleCategories_array,
+        femaleCategories_array,
     })
+})
+
+exports.update_clothings_post = asyncHandler(async (req, res, next) => {
+
+})
+
+exports.delete_clothings_post = asyncHandler(async (req, res, next) => {
+
 })
 
 exports.category_create_get = asyncHandler(async (req, res, next) => {
