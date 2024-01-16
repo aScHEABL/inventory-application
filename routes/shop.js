@@ -12,6 +12,10 @@ router.get("/inventory/overview", shopController.overview);
 
 router.get("/inventory/overview/clothings", shopController.overview_clothings);
 
-router.get("/inventory/clothings/update/:id", shopController.update_clothings);
+router.get("/inventory/clothings/update/:id", shopController.update_clothings_get);
+
+router.get("/inventory/clothings/update/:id", shopController.update_clothings_post);
+
+router.get("/inventory/clothings/delete/:id", shopController.delete_clothings_post);
 
 module.exports = router;
