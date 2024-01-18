@@ -5,6 +5,8 @@ const Category = require("../models/category");
 const Gender = require("../models/gender");
 const Size = require("../models/size");
 
+const { body, validationResult } = require("express-validator");
+
 const asyncHandler = require("express-async-handler");
 
 exports.main = asyncHandler(async(req, res, next) => {
@@ -174,9 +176,27 @@ exports.update_clothings_get = asyncHandler(async (req, res, next) => {
     })
 })
 
-exports.update_clothings_post = asyncHandler(async (req, res, next) => {
+exports.update_clothings_post = [
+    body("clothing-name", "Please fill out this field.")
+    .trim()
+    .isLength({ min: 0 })
+    .escape(),
 
-})
+    body("clothing-price", "Please fill out this field.")
+    .trim()
+    .isLength({ min: 0 })
+    .escape(),
+
+    body("clothing-description", "Please fill out this field.")
+    .trim()
+    .isLength({ min: 0 })
+    .escape(),
+
+    
+    asyncHandler(async (req, res, next) => {
+    
+    })
+]
 
 exports.delete_clothings_post = asyncHandler(async (req, res, next) => {
 
