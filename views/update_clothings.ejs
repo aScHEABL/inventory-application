@@ -3,6 +3,12 @@
 <% extend('layout') %>
 
 <head>
+    <style>
+      .required::after {
+          content: " *";
+          color: red; /* Adjust the color as needed */
+      }
+    </style>
     <script defer>
         const clothingDetails = <%- JSON.stringify(clothingDetails); %>
         const genders_array = <%- JSON.stringify(genders_array); %>
@@ -14,14 +20,15 @@
           }
 
         document.addEventListener("DOMContentLoaded", () => {
-          const genderSelect = document.getElementById("genderSelect");
-          const categorySelect = document.getElementById("categorySelect");
+          const genderSelect = document.getElementById("gender-select");
+          const categorySelect = document.getElementById("category-select");
+          console.log(categorySelect);
 
           
           function populateGender() {
             genders_array.forEach((item) => {
               const option = document.createElement("option");
-              option.value = item.name;
+              option.value = item._id;
               option.textContent = capitalizeFirstLetter(item.name);
               genderSelect.append(option);
             })
@@ -29,21 +36,14 @@
 
           function populateCategory() {
             categorySelect.replaceChildren();
-              if (genderSelect.value === "male") {
-                maleCategories_array.forEach((item) => {
-                  const option = document.createElement("option");
-                  option.value = item.name;
-                  option.textContent = capitalizeFirstLetter(item.name);
-                  categorySelect.append(option);
-                })
-              } else if (genderSelect.value === "female") {
-                femaleCategories_array.forEach((item) => {
-                  const option = document.createElement("option");
-                  option.value = item.name;
-                  option.textContent = capitalizeFirstLetter(item.name);
-                  categorySelect.append(option);
-                })
-              }
+            const genderCategories_array = genderSelect.value === genders_array[0]._id ? maleCategories_array : femaleCategories_array;
+
+            genderCategories_array.forEach((item) => {
+              const option = document.createElement("option");
+              option.value = item._id;
+              option.textContent = capitalizeFirstLetter(item.name);
+              categorySelect.append(option);
+            })
           }
 
           genderSelect.addEventListener("change", () => {
@@ -56,64 +56,65 @@
     </script>
 </head>
 
+<!-- Update clothing form -->
 <form action="" method="post" class="w-full max-w-lg mx-auto">
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-9/12 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" 
+        <!-- Additional verification for clothingDetails._id to match with URL:id -->
+        <input type="hidden" name="clothing-id" value="<%= clothingDetails._id %>">
+
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 required" 
         for="clothing-name">
           Clothing Name
         </label>
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border 
         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" 
         type="text" placeholder="<%= clothingDetails.name %>" name="clothing-name"
-        value="<%= clothingDetails.name %>">
+        value="<%= clothingDetails.name %>" required>
         <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
       </div>
       <div class="w-full md:w-3/12 px-3">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 required"
         for="clothing-price">
           Price
         </label>
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
         rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
         id="grid-last-name" type="text" placeholder="<%= clothingDetails.price %>"
-        value="<%= clothingDetails.price %>" name="clothing-price">
+        value="<%= clothingDetails.price %>" name="clothing-price" required>
       </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" 
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 required" 
         for="clothing-description">
             Clothing Description
         </label>
         <textarea class="appearance-none block w-full h-48 bg-gray-200 text-gray-700 border
-            rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            name="clothing-description">
-            <%= clothingDetails.description %>
-        </textarea>
+            rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="clothing-description" 
+            placeholder="<%= clothingDetails.description %>" required><%= clothingDetails.description %></textarea>
         <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
       </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-2">
       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" 
-        for="clothing-category">
-          Category
+        for="gender-select">
+          Gender
         </label>
-        <select id="genderSelect" class="block appearance-none w-full bg-gray-200 
+        <select id="gender-select" class="block appearance-none w-full bg-gray-200 
         border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight 
-        focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state"
-        name="gender-select">
+        focus:outline-none focus:bg-white focus:border-gray-500" name="gender-select">
           <!-- genders_array -->
         </select>
       </div>
       <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="clothing-gender">
-          Gender
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="clothing-category">
+          Category
         </label>
         <div class="relative">
-          <select id="categorySelect" class="block appearance-none w-full bg-gray-200 border border-gray-200 
-          text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state"
+          <select id="category-select" class="block appearance-none w-full bg-gray-200 border border-gray-200 
+          text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
           name="category-select">
             <!-- categories_array -->
           </select>
@@ -134,6 +135,7 @@
       </div>
     </div>
   </form>
+  <!-- Delete clothing form -->
   <form action="" method="post" class="w-full max-w-lg mx-auto">
     <div class="p-6 w-full flex flex-wrap gap-y-2 justify-center border border-red-500 rounded-md">
       <label class="w-full text-center text-red-300">Dangerous Zone</label>
