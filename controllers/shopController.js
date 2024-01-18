@@ -192,9 +192,15 @@ exports.update_clothings_post = [
     .isLength({ min: 0 })
     .escape(),
 
+    body("clothing-id", "There's no clothingID.")
+    .trim()
+    .isLength({ min: 0 })
+    .escape(),
+
     
     asyncHandler(async (req, res, next) => {
-    
+        const clothingID_fromURL = req.params.id;
+        const clothingID_fromForm = 
     })
 ]
 
