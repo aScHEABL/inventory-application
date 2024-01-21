@@ -197,6 +197,10 @@ exports.update_clothings_post = [
         const clothing = new Clothing({
             ...req.body['clothing-details'],
             name: req.body['clothing-name'],
+            price: req.body['clothing-price'],
+            description: req.body['clothing-description'],
+            gender: req.body['gender-select'],
+            category: req.body['category-select'],
         })
         // const clothing = new Clothing({
         //     name: req.body['clothing-name'],
@@ -208,7 +212,7 @@ exports.update_clothings_post = [
         const clothingID_fromURL = req.params.id;
         // const clothingID_fromForm = 
         console.log(clothing);
-        res.redirect("/shop/test/" + clothing.name);
+        res.redirect("/shop/test/" + clothing.gender);
     })
 ]
 
