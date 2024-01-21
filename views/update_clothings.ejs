@@ -14,6 +14,7 @@
         const genders_array = <%- JSON.stringify(genders_array); %>
         const maleCategories_array = <%- JSON.stringify(maleCategories_array); %>
         const femaleCategories_array = <%- JSON.stringify(femaleCategories_array); %>
+        console.log(clothingDetails);
 
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -22,8 +23,6 @@
         document.addEventListener("DOMContentLoaded", () => {
           const genderSelect = document.getElementById("gender-select");
           const categorySelect = document.getElementById("category-select");
-          console.log(categorySelect);
-
           
           function populateGender() {
             genders_array.forEach((item) => {
@@ -57,11 +56,11 @@
 </head>
 
 <!-- Update clothing form -->
-<form action="" method="post" class="w-full max-w-lg mx-auto">
+<form method="post" class="w-full max-w-lg mx-auto">
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-9/12 px-3 mb-6 md:mb-0">
         <!-- Additional verification for clothingDetails._id to match with URL:id -->
-        <input type="hidden" name="clothing-id" value="<%= clothingDetails._id %>">
+        <input type="hidden" name="clothing-details" value="<%= clothingDetails %>">
 
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 required" 
         for="clothing-name">

@@ -192,15 +192,23 @@ exports.update_clothings_post = [
     .isLength({ min: 0 })
     .escape(),
 
-    body("clothing-id", "There's no clothingID.")
-    .trim()
-    .isLength({ min: 0 })
-    .escape(),
-
     
     asyncHandler(async (req, res, next) => {
+        const clothing = new Clothing({
+            ...req.body['clothing-details'],
+            name: req.body['clothing-name'],
+        })
+        // const clothing = new Clothing({
+        //     name: req.body['clothing-name'],
+        //     price: req.body['clothing-price'],
+        //     description: req.body['clothing-description'],
+        //     id: req.params.id,
+        // })
+
         const clothingID_fromURL = req.params.id;
-        const clothingID_fromForm = 
+        // const clothingID_fromForm = 
+        console.log(clothing);
+        res.redirect("/shop/test/" + clothing.name);
     })
 ]
 
@@ -216,4 +224,11 @@ exports.cloth_create_get = asyncHandler(async (req, res, next) => {
     res.render("cloth_create", {
         title: "Create Cloth Page",
     });
+})
+
+exports.post_test = asyncHandler(async (req, res ,next) => {
+    res.render("test", {
+        title: "test page",
+        id: req.params.id,
+    })
 })
