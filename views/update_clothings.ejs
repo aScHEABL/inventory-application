@@ -14,7 +14,6 @@
         const genders_array = <%- JSON.stringify(genders_array); %>
         const maleCategories_array = <%- JSON.stringify(maleCategories_array); %>
         const femaleCategories_array = <%- JSON.stringify(femaleCategories_array); %>
-        console.log(clothingDetails);
 
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -29,6 +28,9 @@
               const option = document.createElement("option");
               option.value = item._id;
               option.textContent = capitalizeFirstLetter(item.name);
+              // set default selected option for gender
+              item._id === clothingDetails.gender ? option.selected = true : null;
+
               genderSelect.append(option);
             })
           }
@@ -41,6 +43,8 @@
               const option = document.createElement("option");
               option.value = item._id;
               option.textContent = capitalizeFirstLetter(item.name);
+              // set default selected option for category
+              item._id === clothingDetails.category ? option.selected = true : null;
               categorySelect.append(option);
             })
           }

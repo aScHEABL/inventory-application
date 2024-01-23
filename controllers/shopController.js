@@ -194,25 +194,24 @@ exports.update_clothings_post = [
 
     
     asyncHandler(async (req, res, next) => {
-        const clothing = new Clothing({
-            ...req.body['clothing-details'],
-            name: req.body['clothing-name'],
-            price: req.body['clothing-price'],
-            description: req.body['clothing-description'],
-            gender: req.body['gender-select'],
-            category: req.body['category-select'],
-        })
-        // const clothing = new Clothing({
-        //     name: req.body['clothing-name'],
-        //     price: req.body['clothing-price'],
-        //     description: req.body['clothing-description'],
-        //     id: req.params.id,
-        // })
-
-        const clothingID_fromURL = req.params.id;
-        // const clothingID_fromForm = 
-        console.log(clothing);
-        res.redirect("/shop/test/" + clothing.gender);
+        const clothingDetails = req.body['clothing-details'];
+        const clothingID = req.params.id;
+        
+        const newClothingObject = new Clothing({
+                ...clothingDetails,
+                name: req.body['clothing-name'],
+                price: req.body['clothing-price'],
+                description: req.body['clothing-description'],
+                gender: req.body['gender-select'],
+                category: req.body['category-select'],
+            })
+        
+        // Can't delete object property because it's a Mongoose model, need to convert it to a plain Javascript object.
+        const newClothing = new Clothing(newClothingObject).toObject();
+        delete newClothing._id;
+        
+        const updatedClothing = await Clothing.findByIdAndUpdate(clothingID, newClothing, { new: true });
+        res.redirect(updatedClothing.url);
     })
 ]
 
