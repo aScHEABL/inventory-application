@@ -216,6 +216,19 @@ exports.update_clothings_post = [
 ]
 
 exports.delete_clothings_post = asyncHandler(async (req, res, next) => {
+    const clothingID = req.params.id;
+
+    const [clothing, clothingInstances_array] = await Promise.all([
+        Clothing.findById(clothingID).exec(),
+        ClothInstance.find({ clothing: clothingID }).exec(),
+    ])
+
+    if (clothingInstances_array.length > 0) {
+        // There are still clothing instances belong to this clothing, must delete them before attempting to delete the clothing itself.
+
+    } else if (clothingInstances_array.length === 0) {
+        // There's no clothing instance belongs to this clothing, proceed to delete the clothing.
+    }
 
 })
 
@@ -229,7 +242,7 @@ exports.cloth_create_get = asyncHandler(async (req, res, next) => {
     });
 })
 
-exports.post_test = asyncHandler(async (req, res ,next) => {
+exports.post_test = asyncHandler(async (req, res , next) => {
     res.render("test", {
         title: "test page",
         id: req.params.id,
