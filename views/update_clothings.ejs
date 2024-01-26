@@ -62,7 +62,7 @@
 <!-- Update clothing form -->
 <form method="post" class="w-full max-w-lg mx-auto">
     <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-full md:w-9/12 px-3 mb-6 md:mb-0">
+      <div class="w-full md:w-8/12 px-3 mb-6 md:mb-0">
         <!-- Additional verification for clothingDetails._id to match with URL:id -->
         <input type="hidden" name="clothing-details" value="<%= clothingDetails %>">
 
@@ -73,10 +73,15 @@
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border 
         rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" 
         type="text" placeholder="<%= clothingDetails.name %>" name="clothing-name"
-        value="<%= clothingDetails.name %>" required>
-        <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
+        value="<%= clothingDetails.name %>">
+        <% if (locals.errors_array) { %>
+          <% if (errors_array.some((error) => error.path === "clothing-name")) { %>
+            <p class="text-red-500 text-xs italic">1</p>
+            <%= console.log(error) %>
+          <% } %>
+        <% } %>
       </div>
-      <div class="w-full md:w-3/12 px-3">
+      <div class="w-full md:w-4/12 px-3">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 required"
         for="clothing-price">
           Price
@@ -84,7 +89,8 @@
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 
         rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
         id="grid-last-name" type="text" placeholder="<%= clothingDetails.price %>"
-        value="<%= clothingDetails.price %>" name="clothing-price" required>
+        value="<%= clothingDetails.price %>" name="clothing-price">
+
       </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
@@ -147,3 +153,7 @@
       </button>
     </div>
   </form>
+
+  <% if (locals.errors_array) { %>
+      <%- console.log(errors_array) %>
+  <% } %>
