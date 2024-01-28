@@ -12,6 +12,8 @@ router.get("/inventory/overview", shopController.overview);
 
 router.get("/inventory/overview/clothings", shopController.overview_clothings);
 
+router.get("/inventory/clothing/create", shopController.create_clothing_get)
+
 router.get("/inventory/clothings/update/:id", shopController.update_clothings_get);
 
 router.post("/inventory/clothings/update/:id", shopController.update_clothings_post);
