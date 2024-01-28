@@ -172,6 +172,26 @@ exports.create_clothing_get = asyncHandler(async (req, res, next) => {
     })
 })
 
+exports.create_clothing_post = [
+    body("clothing-name", "Please fill out this field.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+    body("clothing-price", "Please fill out this field.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+    body("clothing-description", "Please fill out this field.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+    
+]
+
+
 exports.update_clothings_get = asyncHandler(async (req, res, next) => {
     const clothingID = req.params.id;
 
