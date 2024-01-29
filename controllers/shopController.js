@@ -15,7 +15,7 @@ exports.main = asyncHandler(async(req, res, next) => {
         maleGender,
         femaleGender,
     ] = await Promise.all([
-        Gender.find({}).exec(),
+        Gender.find({}).sort({ name: -1 }).exec(),
         Gender.findOne({ name: "male" }).exec(),
         Gender.findOne({ name: "female" }).exec(),  
     ])
