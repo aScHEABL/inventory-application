@@ -188,7 +188,57 @@ exports.create_clothings_post = [
     .isLength({ min: 1 })
     .escape(),
 
+    asyncHandler(async (req, res, next) => {
+        const errors_array = validationResult(req);
+
+        if (!errors_array.isEmpty()) {
+        const [
+            clothingDetails,
+            genders_array,
+            maleGender,
+            femaleGender,
+        ] = await Promise.all([
+            Clothing.findById(clothingID).exec(),
+            Gender.find({}).sort({ name: -1 }).exec(),
+            Gender.findOne({ name: "male" }).exec(),
+            Gender.findOne({ name: "female" }).exec(),  
+        ])
     
+        const [
+            maleCategories_array,
+            femaleCategories_array,
+        ] = await Promise.all([
+            Category.find({ gender: maleGender }).sort({ name: 1 }).exec(),
+            Category.find({ gender: femaleGender }).sort({ name: 1 }).exec(),
+        ])
+
+        res.render("update_clothings", {
+            title: "Updating Clothing Page",
+            clothingDetails,
+            genders_array,
+            maleCategories_array,
+            femaleCategories_array,
+            errors_array: errors_array.array(),
+        })
+        } else {
+            const clothingDetails = await Clothing.findById(clothingID).exec();
+            const newClothingObject = new Clothing({
+                    ...clothingDetails,
+                    name: req.body['clothing-name'],
+                    price: req.body['clothing-price'],
+                    description: req.body['clothing-description'],
+                    gender: req.body['gender-select'],
+                    category: req.body['category-select'],
+                })
+            
+            // Can't delete object property because it's a Mongoose model, need to convert it to a plain Javascript object.
+            const newClothing = new Clothing(newClothingObject).toObject();
+            delete newClothing._id;
+            
+            const updatedClothing = await Clothing.findByIdAndUpdate(clothingID, newClothing, { new: true });
+            res.redirect(updatedClothing.url);
+        }
+    })
 ]
 
 
