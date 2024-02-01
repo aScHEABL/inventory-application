@@ -277,6 +277,7 @@ exports.update_clothings_post = [
                 errors_array: errors_array.array(),
             })
         } else {
+            const clothingDetails = await Clothing.findById(clothingID).exec();
             const newClothingObject = new Clothing({
                     ...clothingDetails,
                     name: req.body['clothing-name'],
