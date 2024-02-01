@@ -143,7 +143,7 @@ exports.overview_clothings = asyncHandler(async (req, res, next) => {
     })
 })
 
-exports.create_clothing_get = asyncHandler(async (req, res, next) => {
+exports.create_clothings_get = asyncHandler(async (req, res, next) => {
 
     const [
         genders_array,
@@ -172,7 +172,7 @@ exports.create_clothing_get = asyncHandler(async (req, res, next) => {
     })
 })
 
-exports.create_clothing_post = [
+exports.create_clothings_post = [
     body("clothing-name", "Please fill out this field.")
     .trim()
     .isLength({ min: 1 })

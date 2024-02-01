@@ -1,4 +1,4 @@
-<%# views/update_clothings.ejs %>
+<%# views/create_clothings.ejs %>
 
 <% extend('layout') %>
 
@@ -53,7 +53,7 @@
     </script>
 </head>
 
-<!-- Update clothing form -->
+<!-- Create clothing form -->
 <% function errorMsg(inputName) { %>
   <% if (locals.errors_array) { %>
     <% const index = errors_array.findIndex((e) => e.path === inputName) %>
