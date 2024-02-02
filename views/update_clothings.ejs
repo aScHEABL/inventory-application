@@ -153,11 +153,18 @@
     </div>
   </form>
   <!-- Delete clothing form -->
-  <form action="" method="post" class="w-full max-w-lg mx-auto">
+  <form action="<%= '/shop/inventory/clothings/delete/' + clothingDetails._id %>" method="post" class="w-full max-w-lg mx-auto">
     <div class="p-6 w-full flex flex-wrap gap-y-2 justify-center border border-red-500 rounded-md">
       <label class="w-full text-center text-red-300">Dangerous Zone</label>
       <button type="submit" class="btn bg-red-600 text-black rounded-md">
         Delete Clothing
       </button>
+      <!-- <label class="w-full text-center text-red-300"><%= (locals.deleteError) ? deleteError : "" %></label> -->
     </div>
   </form>
+  <% if (locals.deleteError) { %>
+    <div role="alert" class="alert alert-error fixed bottom-0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span><%= deleteError %></span>
+    </div>
+  <% } %>

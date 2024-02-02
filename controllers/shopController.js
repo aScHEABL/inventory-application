@@ -347,7 +347,7 @@ exports.update_clothings_post = [
 exports.delete_clothings_post = asyncHandler(async (req, res, next) => {
     const clothingID = req.params.id;
 
-    const [clothing, clothingInstances_array] = await Promise.all([
+    const [clothingDetails, clothingInstances_array] = await Promise.all([
         Clothing.findById(clothingID).exec(),
         ClothInstance.find({ clothing: clothingID }).exec(),
     ])
@@ -355,8 +355,37 @@ exports.delete_clothings_post = asyncHandler(async (req, res, next) => {
     if (clothingInstances_array.length > 0) {
         // There are still clothing instances belong to this clothing, must delete them before attempting to delete the clothing itself.
 
+        const [
+            genders_array,
+            maleGender,
+            femaleGender,
+        ] = await Promise.all([
+            Gender.find({}).sort({ name: -1 }).exec(),
+            Gender.findOne({ name: "male" }).exec(),
+            Gender.findOne({ name: "female" }).exec(),  
+        ])
+
+        const [
+            maleCategories_array,
+            femaleCategories_array,
+        ] = await Promise.all([
+            Category.find({ gender: maleGender }).sort({ name: 1 }).exec(),
+            Category.find({ gender: femaleGender }).sort({ name: 1 }).exec(),
+        ])
+
+        res.render("update_clothings", {
+            title: "Updating Clothing Page",
+            clothingDetails,
+            genders_array,
+            maleCategories_array,
+            femaleCategories_array,
+            deleteError: "Some clothing instances still dependent on this clothing, remove them first!",
+        })
+
     } else if (clothingInstances_array.length === 0) {
         // There's no clothing instance belongs to this clothing, proceed to delete the clothing.
+        await Clothing.findByIdAndDelete(clothingID);
+        res.redirect("/shop/inventory/overview/clothings");
     }
 
 })

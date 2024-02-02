@@ -10,7 +10,7 @@ router.get("/inventory/clothings/update/:id", shopController.update_clothings_ge
 
 router.post("/inventory/clothings/update/:id", shopController.update_clothings_post);
 
-router.get("/inventory/clothings/delete/:id", shopController.delete_clothings_post);
+router.post("/inventory/clothings/delete/:id", shopController.delete_clothings_post);
 
 router.get("/inventory/clothings/create", shopController.create_clothings_get);
 
