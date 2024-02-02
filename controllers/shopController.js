@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Clothing = require("../models/clothing");
-const ClothInstance = require("../models/clothInstance");
+const ClothingInstance = require("../models/clothingInstance");
 const Category = require("../models/category");
 const Gender = require("../models/gender");
 const Size = require("../models/size");
@@ -52,7 +52,7 @@ exports.clothing_details = asyncHandler(async (req, res, next) => {
 
     const [clothing, clothInstance] = await Promise.all([
         Clothing.findById(clothingID).exec(),
-        ClothInstance.find({ clothing: clothingID }).populate("size").exec(),
+        ClothingInstance.find({ clothing: clothingID }).populate("size").exec(),
     ])
 
     // Create an object to store the counts
@@ -94,7 +94,7 @@ exports.overview = asyncHandler(async (req, res, next) => {
                 return '<span class="material-symbols-outlined scale-[2]">width</span>';
             case 'genders':
                 return '<span class="material-symbols-outlined scale-[2]">transgender</span>';
-            case 'clothInstances':
+            case 'clothingInstances':
                 return '<span class="material-symbols-outlined scale-[2]">deployed_code</span>';
             case 'carts':
                 return '<span class="material-symbols-outlined scale-[2]">shopping_cart</span>';
@@ -126,11 +126,11 @@ exports.overview = asyncHandler(async (req, res, next) => {
 })
 
 exports.overview_clothings = asyncHandler(async (req, res, next) => {
-    const clothingRaw_array = await Clothing.find({}).sort({ name: 1 }).populate("category gender").exec()
+    const clothingsRaw_array = await Clothing.find({}).sort({ name: 1 }).populate("category gender").exec()
 
-    // Add the count of ClothInstances for each Clothing
-    const clothing_array = await Promise.all(clothingRaw_array.map(async (clothing) => {
-        const clothInstanceCount = await ClothInstance.countDocuments({ clothing: clothing._id });
+    // Add the count of ClothingInstances for each Clothing
+    const clothing_array = await Promise.all(clothingsRaw_array.map(async (clothing) => {
+        const clothInstanceCount = await ClothingInstance.countDocuments({ clothing: clothing._id });
         return {
             ...clothing.toObject(),
             clothInstanceCount,
@@ -140,6 +140,15 @@ exports.overview_clothings = asyncHandler(async (req, res, next) => {
     res.render("overview_clothings", {
         title: "Clothings Overview",
         clothing_array,
+    })
+})
+
+exports.overview_clothingInstances = asyncHandler(async (req, res, next) => {
+    const clothingInstances_array = await ClothingInstance.find().populate("clothing size").exec();
+
+    res.render("overview_clothingInstances", {
+        title: "Clothing Instances overview",
+        clothingInstances_array,
     })
 })
 
@@ -349,7 +358,7 @@ exports.delete_clothings_post = asyncHandler(async (req, res, next) => {
 
     const [clothingDetails, clothingInstances_array] = await Promise.all([
         Clothing.findById(clothingID).exec(),
-        ClothInstance.find({ clothing: clothingID }).exec(),
+        ClothingInstance.find({ clothing: clothingID }).exec(),
     ])
 
     if (clothingInstances_array.length > 0) {
@@ -388,16 +397,6 @@ exports.delete_clothings_post = asyncHandler(async (req, res, next) => {
         res.redirect("/shop/inventory/overview/clothings");
     }
 
-})
-
-exports.category_create_get = asyncHandler(async (req, res, next) => {
-
-})
-
-exports.cloth_create_get = asyncHandler(async (req, res, next) => {
-    res.render("cloth_create", {
-        title: "Create Cloth Page",
-    });
 })
 
 exports.post_test = asyncHandler(async (req, res , next) => {

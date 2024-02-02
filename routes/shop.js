@@ -22,6 +22,8 @@ router.get("/inventory/overview", shopController.overview);
 
 router.get("/inventory/overview/clothings", shopController.overview_clothings);
 
+router.get("/inventory/overview/clothingInstances", shopController.overview_clothingInstances);
+
 router.get("/test/:id", shopController.post_test);
 
 module.exports = router;

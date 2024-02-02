@@ -13,7 +13,7 @@ console.log(
   const Cart = require("./models/cart");
   const Category = require("./models/category");
   const Clothing = require("./models/clothing");
-  const ClothInstance = require("./models/clothInstance");
+  const ClothingInstance = require("./models/clothingInstance");
   const Gender = require("./models/gender");
   const Order = require("./models/order");
   const Review = require("./models/review");
@@ -53,7 +53,7 @@ console.log(
     await createGender();
     await createCategory();
     await createClothing();
-    await createClothInstance();
+    await createClothingInstance();
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
   }
@@ -100,10 +100,10 @@ console.log(
     }
   }
 
-  async function NewClothInstance(index, clothingReference, sizeType) {
+  async function NewClothingInstance(index, clothingReference, sizeType) {
     const size = await Size.findOne({ name: sizeType });
 
-    const clothInstance = new ClothInstance({
+    const clothInstance = new ClothingInstance({
       clothing: clothingReference,
       size: size,
     });
@@ -444,7 +444,7 @@ console.log(
     ])
   }
 
-  async function createClothInstance() {
+  async function createClothingInstance() {
     console.log("Adding cloth instances");
   
     // Create an array to store promises for cloth instances
@@ -459,7 +459,7 @@ console.log(
         const sizes = ["small", "medium", "large", "extra-large"];
         const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
         console.log(randomSize);
-        return NewClothInstance(index, item, randomSize);
+        return NewClothingInstance(index, item, randomSize);
       });
   
       // Concatenate the promises to the outer array
