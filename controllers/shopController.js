@@ -144,7 +144,22 @@ exports.overview_clothings = asyncHandler(async (req, res, next) => {
 })
 
 exports.overview_clothingInstances = asyncHandler(async (req, res, next) => {
-    const clothingInstances_array = await ClothingInstance.find().populate("clothing size").exec();
+    const clothingInstances_array = 
+    await ClothingInstance
+    .find()
+    .populate({ path: 'size'})
+    .populate({ path: 'clothing', 
+        populate: [
+            {
+                path: "category",
+                model: "Category",
+            },
+            {
+                path: "gender",
+                model: "Gender",
+            }
+        ]})
+    .exec();
 
     res.render("overview_clothingInstances", {
         title: "Clothing Instances overview",
