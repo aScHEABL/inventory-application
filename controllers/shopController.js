@@ -414,6 +414,14 @@ exports.delete_clothings_post = asyncHandler(async (req, res, next) => {
 
 })
 
+exports.delete_clothingInstance_get = asyncHandler(async (req, res, next) => {
+    const clothingInstanceID = req.params.id;
+    console.log(clothingInstanceID);
+    
+    await ClothingInstance.findByIdAndDelete(clothingInstanceID);
+    res.redirect("/shop/inventory/overview/clothingInstances");
+})
+
 exports.post_test = asyncHandler(async (req, res , next) => {
     res.render("test", {
         title: "test page",

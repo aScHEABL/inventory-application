@@ -18,6 +18,8 @@ router.post("/inventory/clothings/create", shopController.create_clothings_post)
 
 router.get("/inventory/clothings/:id", shopController.clothing_details);
 
+router.get("/inventory/clothingInstance/delete/:id", shopController.delete_clothingInstance_get);
+
 router.get("/inventory/overview", shopController.overview);
 
 router.get("/inventory/overview/clothings", shopController.overview_clothings);
